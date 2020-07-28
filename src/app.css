@@ -1,0 +1,88 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+nav ul {
+    background-color: whitesmoke;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+li {
+    background-color: gainsboro;
+    list-style: none;
+    padding: 0px 5px;
+}
+
+footer {
+    background-color: gray;
+    flex-shrink: 0;
+}
+
+table,
+th,
+td {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+
+/*Timeline editor*/
+
+#timeline-editor {
+    border-right: black 2px solid;
+    width: 30%;
+}
+
+#timeline-editor table {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#timeline-editor table td {
+    background-color: whitesmoke;
+}
+
+.date-cell {
+    width: 30%;
+}
+
+#add-event {
+    width: 18px;
+    height: 18px;
+    align-self: center;
+    text-align: center;
+    background-color: gray;
+}
+
+
+/*Map editor*/
+
+
+/*Functionality*/
+
+.button:hover {
+    filter: brightness(80%);
+}
+
+.button.active {
+    filter: brightness(80%);
+}
