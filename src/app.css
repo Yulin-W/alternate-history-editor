@@ -57,7 +57,7 @@ td {
     width: 100%;
 }
 
-#timeline-editor table td {
+#timeline-editor tbody td {
     background-color: whitesmoke;
 }
 
@@ -65,16 +65,138 @@ td {
     width: 30%;
 }
 
-#add-event {
-    width: 18px;
-    height: 18px;
-    align-self: center;
-    text-align: center;
+
+/*Map editor*/
+
+#map-editor {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+#toolbar {
+    height: 25px;
+    width: 100%;
+}
+
+#map {
+    height: 90%;
+}
+
+.info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
+
+#colour-choice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.colour {
+    border: whitesmoke 1px solid;
+    display: block;
+    margin-left: 1px;
+    margin-right: 1px;
+    height: 95%;
+    width: 4.5%;
+}
+
+.colour.active {
+    border: black 1px solid;
+}
+
+#white {
+    background-color: white;
+}
+
+#gray {
     background-color: gray;
 }
 
+#silver {
+    background-color: silver;
+}
 
-/*Map editor*/
+#black {
+    background-color: black;
+}
+
+#red {
+    background-color: red;
+}
+
+#crimson {
+    background-color: crimson;
+}
+
+#ruby {
+    background-color: #9B111E;
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#fire {
+    background-color: #e25822;
+}
+
+#gold {
+    background-color: gold;
+}
+
+#lime {
+    background-color: lime;
+}
+
+#persian-green {
+    background-color: #00A693;
+}
+
+#basil {
+    background-color: #579229;
+}
+
+#navy {
+    background-color: navy;
+}
+
+#sky-blue {
+    background-color: skyblue;
+}
+
+#persian-blue {
+    background-color: #1C39BB;
+}
+
+#lavender {
+    background-color: lavender;
+}
+
+#tyrian-purple {
+    background-color: #66023C;
+}
+
+#wine {
+    background-color: #722f37;
+}
+
+#brown {
+    background-color: brown;
+}
 
 
 /*Functionality*/
