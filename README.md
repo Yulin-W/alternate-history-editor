@@ -4,6 +4,9 @@
 - Using the admin level map will be rather laggy, so for most purposes rather use national level map
 - Nation level map doesn't have nation names yet
 
+## BUGS
+- Admin map colouring appears to colour in everything after switching time poits
+
 ## Possible uses
 - Alternate history timeline OFC ^_^
 - Creating timeline of borders for the existing history (so good for say keep track of border changes for notes for history students (well, maybe))
