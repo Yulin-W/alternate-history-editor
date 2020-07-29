@@ -134,7 +134,7 @@ info.onAdd = function(map) {
 info.update = function(props) {
     this._div.innerHTML = (props ?
         '<b>' + props.name + '</b><br />' :
-        'Hover over a region for details');
+        "Hover over a region for details" + "<br>" + "To colour regions, you need to first select a point in time on the timeline");
 };
 
 info.addTo(map);
