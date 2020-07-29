@@ -15,9 +15,9 @@ colours["persian-green"] = "#00A693";
 colours["basil"] = "#579229";
 colours["navy"] = "navy";
 colours["sky-blue"] = "skyblue";
-colours["persian - blue"] = "#1C39BB";
+colours["persian-blue"] = "#1C39BB";
 colours["lavender"] = "lavender";
-colours["tyrian - purple"] = "#66023C";
+colours["tyrian-purple"] = "#66023C";
 colours["wine"] = "#722f37";
 colours["brown"] = "brown";
 
@@ -45,7 +45,7 @@ class DataStorage { // Storage class for holding EntryStorage instances indexed 
             "entryElement": entryElement,
             "date": date,
             "event": event,
-            "mapdata": mapData
+            "mapData": mapData
         };
         this.entryCount++; //increments entryCount such that no id (key) in entryDict will ever be the same #TODO: potential loop hole though if you have so many ids that this count overflows, but I doubt it tbh
     }
@@ -96,12 +96,9 @@ function resetHighlight(e) {
 
 function clickFeature(e) {
     if (appInterface.mapInterface.currentColour && appInterface.timelineInterface.currentDate) {
-        let currentDate = appInterface.timelineInterface.currentDate.innerText;
         let feature = e.target.feature;
         feature.properties.colour = appInterface.mapInterface.currentColour.id;
-        //appInterface.mapInterface.mapDict[currentDate][feature.properties.WOE_ID] = feature.properties.colour;
-        //console.log(appInterface.mapInterface.mapDict[currentDate]);
-        //console.log(feature.properties);
+        appInterface.dataStorage.entryDict[appInterface.timelineInterface.currentID]["mapData"][feature.properties.WOE_ID] = feature.properties.colour;
     }
 }
 
@@ -121,7 +118,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 */
 
-geojson = L.geoJSON(geojson_nation, {
+var geojson = L.geoJSON(geojson_nation, {
     style: style,
     onEachFeature: onEachFeature
 }).addTo(map);
@@ -162,8 +159,24 @@ class MapInterface {
         });
     }
 
-    loadMap(date) { //FIXME: Loads map settings for specified date into map editor
-        pass
+    loadMap(mapData = null) {
+        // Set properties of all features as white (effectively resetting the map but quicker than reloading) except for those whose WOE_ID are mentioned in the mapData
+        if (mapData) {
+            Object.values(geojson._layers).forEach(layer => {
+                let layerID = layer.feature.properties.WOE_ID;
+                if (layerID in mapData) {
+                    layer.feature.properties.colour = mapData[layerID];
+                } else {
+                    layer.feature.properties.colour = "white";
+                }
+                geojson.resetStyle(layer); // Refreshes the colour of the layer
+            });
+        } else {
+            Object.values(geojson._layers).forEach(layer => {
+                layer.feature.properties.colour = "white";
+                geojson.resetStyle(layer); // Refreshes the colour of the layer
+            });
+        }
     }
 }
 
@@ -188,6 +201,7 @@ class TimelineInterface {
         this.dateCells = {};
         this.eventCells = {};
         this.currentDate = null;
+        this.currentEvent = null;
         this.currentCell = null;
         this.currentID = null;
         this.addEntry("0", "Beginning of the first millenium");
@@ -195,7 +209,6 @@ class TimelineInterface {
     }
 
     updateCellList(newEntry, currentID) { // For whenever new cells are added
-        console.log(newEntry);
         let cells = newEntry.querySelectorAll("td");
         this.entryCells[currentID] = newEntry;
         this.allCells.push(cells[0]);
@@ -207,7 +220,7 @@ class TimelineInterface {
     }
 
     addEntry(date = "", event = "", previousEntry = null) { // Adds new entry directly below current entry where shift enter was called and returns reference to the new date cell in the new entry
-        let currentID = this.appInterface.dataStorage.entryCount;
+        let currentID = this.appInterface.dataStorage.entryCount; // TODO: such currentID variable is bad as easily mistaken for the this.currenID variable
         let newEntry = document.createElement("tr");
 
         const newDateCell = document.createElement("td");
@@ -221,15 +234,18 @@ class TimelineInterface {
         newEventCell.setAttribute("contenteditable", "true");
 
         newEntry.append(newDateCell);
-        newEntry.append(newEventCell)
+        newEntry.append(newEventCell);
 
-        if (previousEntry !== null) {
+        this.appInterface.dataStorage.addEntry(newEntry, date, event, {});
+
+        if (previousEntry !== null) { //  there was a specified previous entry
             this.tbody.insertBefore(newEntry, previousEntry.nextSibling);
+            // For copying the previous entry's map into the new entry
+            let previousID = Object.keys(this.entryCells).find(key => this.entryCells[key] === previousEntry) // TODO: again, such lookup is quite slow I'd reckon; note we didn't just take currentID - 1 as due to insertions and deletions the ids may well not be in order
+            this.appInterface.dataStorage.entryDict[currentID]["mapData"] = JSON.parse(JSON.stringify(this.appInterface.dataStorage.entryDict[previousID]["mapData"]));
         } else { // insert at default location at the end
             this.tbody.insertBefore(newEntry, null);
         }
-
-        this.appInterface.dataStorage.addEntry(newEntry, date, event, {});
 
         this.updateCellList(newEntry, currentID);
 
@@ -253,7 +269,7 @@ class TimelineInterface {
                             const newDateCell = this.addEntry("", "", currentEntry);
                             this.clickCell(newDateCell);
                         }
-                    } else if (e.key == "Backspace") { // Delete current cell
+                    } else if (e.key == "Backspace") { // Delete current cell //FIXME: add in data storage entry deletion and other cell list deletions
                         e.preventDefault();
                         const currentEntry = this.tbody.querySelector("tr:focus-within");
                         if (currentEntry) {
@@ -266,21 +282,22 @@ class TimelineInterface {
     }
 
     clickCell(cell) { // Actions to take when a cell is pressed
-        //FIXME: add functionality of changeing maps to those of corresponding date when clicked
         if (this.currentCell) {
             this.currentCell.classList.remove("active");
-            this.updateCorrespondingStorage(this.currentCell); // i.e. saves the edit for the current cell before changing
+            this.updateCorrespondingStorage(this.currentID);
         }
         cell.classList.add("active");
         cell.focus();
         this.currentCell = cell;
         this.currentDate = cell.parentNode.children[0];
+        this.currentEvent = cell.parentNode.children[1];
         this.currentID = Object.keys(this.dateCells).find(key => this.dateCells[key] === this.currentDate); // TODO: this search may well become rather inefficient, perhaps aim for a 2 way dict?
-        this.updateCorrespondingStorage(this.currentID);
+        this.appInterface.mapInterface.loadMap(this.appInterface.dataStorage.entryDict[this.currentID]["mapData"]);
     }
 
-    updateCorrespondingStorage(entryID) { // Updates corresponding Data Storage entry for the entryID specified
-        this.appInterface.dataStorage.entryDict[entryID]
+    updateCorrespondingStorage(entryID) { // Updates corresponding Data Storage entry info for date and event for the entryID specified
+        this.appInterface.dataStorage.entryDict[entryID]["date"] = this.currentDate.innerText;
+        this.appInterface.dataStorage.entryDict[entryID]["event"] = this.currentEvent.innerText;
     }
 }
 
@@ -296,6 +313,7 @@ class Menubar {
                 onEachFeature: onEachFeature
             }).addTo(map);
             this.appInterface.timelineInterface.resetTimeline();
+            this.appInterface.mapInterface.loadMap();
         });
         this.newNation = document.querySelector("#new-nation");
         this.newNation.addEventListener("click", () => {
@@ -305,6 +323,7 @@ class Menubar {
                 onEachFeature: onEachFeature
             }).addTo(map);
             this.appInterface.timelineInterface.resetTimeline();
+            this.appInterface.mapInterface.loadMap();
         });
         this.SaveAs = document.querySelector("#save-as");
         this.SaveAs.addEventListener("click", () => {

@@ -13,8 +13,8 @@
 - Shift + Backspace: deletes currently focused timeline entry
 
 ## Planned functionalities
-- [ ] Timeline editor (each time point specified will have corresponding map; by default map of new time point inherits those of preceding time point)
-- [ ] Border/map editor (via working with Leaflet, geoJSON)
+- [x] Timeline editor (each time point specified will have corresponding map; by default map of new time point inherits those of preceding time point)
+- [x] Map colourer (via working with Leaflet, geoJSON)
 - [ ] Exportable to common formats (e.g. timeline to txt, timeline & corresponding maps to word, etc.)
 
 ## Possible future additional changes
