@@ -3,9 +3,12 @@
 ## Notes
 - Using the admin level map will be rather laggy, so for most purposes rather use national level map
 - Nation level map doesn't have nation names yet
+- Need to refactor to clean up code and split files
 
 ## BUGS
 - Admin map colouring appears to colour in everything after switching time poits
+- Need to ensure olour change upon assign, not upon mouse leaving region
+- Strange map data leak issues and causes colour assigning to cook
 
 ## Possible uses
 - Alternate history timeline OFC ^_^
@@ -23,7 +26,7 @@
 ## Possible future additional changes
 - Refactoring to clean up code
 - Different map layers (e.g. terrain, population density, etc.)
-- More parameter customisation, e.g.
+- More parameter customisation, e.g. (parts could come from the geojson data used)
   - Flag
   - Population
   - GDP
