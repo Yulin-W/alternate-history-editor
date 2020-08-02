@@ -41,6 +41,7 @@ You can also download some of the sample timelines and load them into the demo t
 - [x] Save and load files
 
 ### Possible future additional changes (unlikely though in the near future)
+- Importing not entire timelines but only single timepoint or multiple from a timeline file to next cell (Suggest focus on dis as helps merge timeline files)
 - Different map layers (e.g. terrain, population density, etc.)
 - Allow somehow to read from say images geojson, e.g. get historic borders
 - Allow entry adding that doesn't inherit previous as well for non timeline maps
