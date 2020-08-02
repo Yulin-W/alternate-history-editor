@@ -5,9 +5,11 @@ import { Menubar } from './menubar.js';
 
 export class AppInterface {
     constructor() {
+        // Note the below ordering matters due to coupling between the classes
+        // TODO: somehow reduce the coupling between the classes
         this.dataStorage = new DataStorage();
-        this.timelineInterface = new TimelineInterface(this);
         this.mapInterface = new MapInterface(this);
+        this.timelineInterface = new TimelineInterface(this);
         this.menubar = new Menubar(this);
     }
 }

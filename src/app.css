@@ -43,6 +43,15 @@ td {
     border-collapse: collapse;
 }
 
+#menubar {
+    border-bottom: 2px black solid;
+}
+
+#menubar li {
+    margin-right: 2px;
+    padding: 3px 8px;
+}
+
 
 /*Timeline editor*/
 
@@ -68,6 +77,10 @@ td {
 
 /*Map editor*/
 
+.leaflet-container {
+    background: #AADAFF;
+}
+
 #map-editor {
     display: flex;
     flex-direction: column;
@@ -81,6 +94,29 @@ td {
 
 #map {
     height: 90%;
+}
+
+.legend {
+    display: flex;
+    flex-direction: column;
+    line-height: 18px;
+    color: #555;
+}
+
+.legend-entry {
+    display: flex;
+    flex-direction: row;
+    margin: 2px 0px;
+}
+
+.legend i {
+    border: 1px black solid;
+    border-radius: 3px;
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
 }
 
 .info {
@@ -108,14 +144,25 @@ td {
 .colour {
     border: whitesmoke 1px solid;
     display: block;
-    margin-left: 1px;
-    margin-right: 1px;
-    height: 95%;
+    margin: 2px 1px;
+    height: 90%;
     width: 4.5%;
 }
 
 .colour.active {
-    border: black 1px solid;
+    border: black 2px solid;
+}
+
+#no-colour {
+    background-color: white;
+}
+
+#no-colour:after {
+    display: inline-block;
+    content: "\00d7";
+    text-align: center;
+    font-weight: 700;
+    color: red;
 }
 
 #white {

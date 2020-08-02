@@ -22,17 +22,70 @@ export class MapInterface {
         this.setupMap();
     }
 
-    setupMap() {
+    setupMap() { // For initial starup map setup
         this.map = L.map('map');
         this.map.setView([25, 10], 2);
-        /*
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        */
+        this.map.doubleClickZoom.disable(); // Disable double click zoom as it is used for legend editing
+        // TODO: consider adding a optiions page to allow options such as adding underneath a OpenStreat map or terrain map or whatever
         this.geojson = L.geoJSON(geojson_nation, {
             style: this.style,
         }).addTo(this.map);
+        this.initialiseFeatureID();
+        this.addFeatureListeners();
+        this.initialiseLegend();
+    }
+
+    initialiseLegend() {
+        this.legend = null;
+        this.legend = L.control({ position: "bottomright" });
+        this.legend.onAdd = function(map) {
+            const div = L.DomUtil.create("div", "info legend")
+            return div;
+        };
+
+        this.legend.addTo(this.map);
+    }
+
+    resetLegend() {
+        this.legend._container.innerHTML = "";
+    }
+
+    updateLegend(currentID) { // Updates based on the data stored in dataStorage under appInterface given specified ID
+        // TODO: not the most efficient tbh as has to loop over legendData entirely
+        this.legend._container.innerHTML = ""; // Clear out legend
+        let legendData = this.appInterface.dataStorage.entryDict[currentID]["legendData"];
+        Object.keys(legendData).forEach(colourID => {
+            const newEntry = document.createElement("div");
+            newEntry.classList.add("legend-entry");
+            newEntry.innerHTML = '<i style="background:' + colours[colourID] + '"></i>';
+            const labelElement = document.createElement("div");
+            labelElement.innerText = legendData[colourID]["entry"];
+            labelElement.addEventListener("dblclick", () => { // Functionality for editing and updating labels
+                let entryInput = document.createElement("input");
+                entryInput.classList.add("entry-input");
+                entryInput.setAttribute("type", "text");
+                entryInput.placeholder = labelElement.innerText;
+                labelElement.style.display = "none";
+                newEntry.appendChild(entryInput);
+                entryInput.click();
+                entryInput.addEventListener("focusout", () => {
+                    this.appInterface.dataStorage.entryDict[currentID]["legendData"][colourID]["entry"] = entryInput.value;
+                    labelElement.innerText = entryInput.value;
+                    newEntry.removeChild(entryInput);
+                    labelElement.style.display = "block";
+                });
+                entryInput.addEventListener("keydown", (e) => { // Alternative means of finishing entryInput editing
+                    if (e.key === "Enter") {
+                        e.target.blur();
+                    }
+                });
+            });
+            newEntry.appendChild(labelElement);
+            this.legend._container.appendChild(newEntry);
+        });;
+    }
+
+    addFeatureListeners() {
         Object.values(this.geojson._layers).forEach(layer => {
             layer.addEventListener("mouseover", (e) => {
                 this.highlightFeature(e)
@@ -46,22 +99,53 @@ export class MapInterface {
         });
     }
 
+    initialiseFeatureID() {
+        let currentID = 0;
+        Object.values(this.geojson._layers).forEach(layer => {
+            layer.feature.properties.FEATURE_ID = currentID;
+            currentID++;
+        });
+    }
+
+    resetMap() { // For resetting map after app has started
+        //TODO: this and setupMap method are sharing too much in common, peryhaps make a new function
+        let mapType = this.appInterface.dataStorage.mapType;
+        this.map.removeLayer(this.geojson);
+        if (mapType === "nation") {
+            this.geojson = L.geoJSON(geojson_nation, {
+                style: this.style,
+            }).addTo(this.map);
+        } else if (mapType === "admin") {
+            this.geojson = L.geoJSON(geojson_admin, {
+                style: this.style,
+            }).addTo(this.map);
+        }
+        this.initialiseFeatureID();
+        this.addFeatureListeners();
+        this.resetLegend();
+    }
+
     loadMap(mapData = null) {
-        // Set properties of all features as white (effectively resetting the map but quicker than reloading) except for those whose WOE_ID are mentioned in the mapData
+        // Set properties of all features as white (effectively resetting the map but quicker than reloading) except for those whose FEATURE_ID are mentioned in the mapData
         if (mapData) {
             Object.values(this.geojson._layers).forEach(layer => {
-                let layerID = layer.feature.properties.WOE_ID;
+                let layerID = layer.feature.properties.FEATURE_ID;
                 if (layerID in mapData) {
-                    layer.feature.properties.colour = mapData[layerID];
+                    layer.setStyle({
+                        fillColor: colours[mapData[layerID]]
+                    });
+                    layer.feature.properties.colour_on_map = mapData[layerID];
                 } else {
-                    layer.feature.properties.colour = "white";
+                    layer.setStyle({
+                        fillColor: "silver"
+                    });
                 }
-                this.geojson.resetStyle(layer); // Refreshes the colour of the layer
             });
         } else {
             Object.values(this.geojson._layers).forEach(layer => {
-                layer.feature.properties.colour = "white";
-                this.geojson.resetStyle(layer); // Refreshes the colour of the layer
+                layer.setStyle({
+                    fillColor: "silver"
+                });
             });
         }
     }
@@ -73,7 +157,7 @@ export class MapInterface {
             opacity: 1,
             color: 'gray',
             dashArray: '',
-            fillOpacity: 0.7
+            fillOpacity: 1
         };
     }
 
@@ -84,7 +168,6 @@ export class MapInterface {
             weight: 2,
             color: 'black',
             dashArray: '',
-            fillOpacity: 0.7
         });
 
         if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
@@ -93,14 +176,39 @@ export class MapInterface {
     }
 
     resetHighlight(e) {
-        this.geojson.resetStyle(e.target);
+        e.target.setStyle({
+            weight: 1,
+            color: 'gray',
+        });
     }
 
     clickFeature(e) {
         if (this.appInterface.mapInterface.currentColour && this.appInterface.timelineInterface.currentDate) {
+            let currentID = this.appInterface.timelineInterface.currentID;
             let feature = e.target.feature;
-            feature.properties.colour = this.appInterface.mapInterface.currentColour.id;
-            this.appInterface.dataStorage.entryDict[this.appInterface.timelineInterface.currentID]["mapData"][feature.properties.WOE_ID] = feature.properties.colour;
+            let currentColour = this.appInterface.mapInterface.currentColour.id;
+
+            e.target.setStyle({ // Actual colouring of the feature
+                fillColor: colours[currentColour]
+            });
+            if (feature.properties.colour_on_map in this.appInterface.dataStorage.entryDict[currentID]["legendData"]) {
+                this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"]--; //decrement count on the colour to be altered
+                if (this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"] === 0) { // Remove colour entry in legendData if its count becomes 0
+                    delete this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map];
+                }
+            }
+            if (currentColour !== "no-colour") { // Case other than where no-colour colouring option was selected
+                feature.properties.colour_on_map = currentColour;
+                this.appInterface.dataStorage.entryDict[currentID]["mapData"][feature.properties.FEATURE_ID] = currentColour; // Alter mapData record for the feature
+                if (!(currentColour in this.appInterface.dataStorage.entryDict[currentID]["legendData"])) { // Deal with if the new colour isn't recorded in legendData yet
+                    this.appInterface.dataStorage.entryDict[currentID]["legendData"][currentColour] = {
+                        count: 0,
+                        entry: "Label"
+                    }
+                }
+                this.appInterface.dataStorage.entryDict[currentID]["legendData"][currentColour]["count"]++; // increment count on the colour to be altered
+            }
+            this.updateLegend(this.appInterface.timelineInterface.currentID);
         }
     }
 }

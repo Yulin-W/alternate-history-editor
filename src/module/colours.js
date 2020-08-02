@@ -1,7 +1,7 @@
 export const colours = {};
 colours["white"] = "white";
 colours["gray"] = "gray";
-colours["silver"] = "silver";
+colours["no-colour"] = "silver";
 colours["black"] = "black";
 colours["red"] = "red";
 colours["crimson"] = "crimson";

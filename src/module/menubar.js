@@ -3,27 +3,62 @@ export class Menubar {
         this.appInterface = appInterface; // TODO: I feel that doing this is not a good idea, but can't think of easier way for classes in composition to communciate witht he main class
         this.newAdmin = document.querySelector("#new-admin");
         this.newAdmin.addEventListener("click", () => {
-            map.removeLayer(geojson);
-            geojson = L.geoJSON(geojson_admin, {
-                style: style,
-                onEachFeature: onEachFeature
-            }).addTo(map);
+            this.appInterface.dataStorage.resetEntryDict();
+            this.appInterface.dataStorage.mapType = "admin";
+            this.appInterface.mapInterface.resetMap();
             this.appInterface.timelineInterface.resetTimeline();
-            this.appInterface.mapInterface.loadMap();
         });
         this.newNation = document.querySelector("#new-nation");
         this.newNation.addEventListener("click", () => {
-            map.removeLayer(geojson);
-            geojson = L.geoJSON(geojson_nation, {
-                style: style,
-                onEachFeature: onEachFeature
-            }).addTo(map);
+            this.appInterface.dataStorage.resetEntryDict();
+            this.appInterface.dataStorage.mapType = "nation";
+            this.appInterface.mapInterface.resetMap();
             this.appInterface.timelineInterface.resetTimeline();
-            this.appInterface.mapInterface.loadMap();
         });
-        this.SaveAs = document.querySelector("#save-as");
-        this.SaveAs.addEventListener("click", () => {
-            //FIXME:
+        this.save = document.querySelector("#save");
+        this.save.addEventListener("click", () => {
+            // Stringifies dataStorage instance to txt for downloading
+            let saveData = {
+                entryDict: this.appInterface.dataStorage.entryDict,
+                mapType: this.appInterface.dataStorage.mapType,
+                entryCount: this.appInterface.dataStorage.entryCount
+            };
+            this.saveFile("timeline.json", JSON.stringify(saveData));
         });
+        this.load = document.querySelector("#load");
+        this.fileChoice = this.load.querySelector(".file-choice");
+        this.fileChoice.addEventListener("change", () => { // Setup file load TODO: move dis to a function I'd say
+            if (this.fileChoice.value !== "") { // avoid triggering the file load process when the fileChoice value is reset to "" at the end of file load processes
+                let fr = new FileReader();
+                fr.onload = () => {
+                    let result = JSON.parse(JSON.stringify(JSON.parse(fr.result))); // for some reason direct parsing cooks with data mutation and so on, so did this
+                    this.appInterface.dataStorage.resetEntryDict();
+                    this.appInterface.dataStorage.entryDict = result.entryDict;
+                    this.appInterface.dataStorage.entryCount = result.entryCount;
+                    this.appInterface.dataStorage.mapType = result.mapType;
+                    this.appInterface.mapInterface.resetMap();
+                    this.appInterface.timelineInterface.loadTimeline();
+                    this.fileChoice.value = ""; // reset fileChoice input value so that in the case where the new chosen file was the previous, the load function would still trigger as "change" event would still be fired
+                }
+                fr.readAsText(this.fileChoice.files[0]);
+            }
+        });
+        this.load.addEventListener("click", () => {
+            this.loadFile();
+        });
+    }
+
+    saveFile(filename, text) {
+        let element = document.createElement("a");
+        element.setAttribute("href", "data:text/json;charset=utf-8," + encodeURIComponent(text));
+        element.setAttribute("download", filename);
+        element.style.display = "none";
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
+
+    loadFile() {
+        this.fileChoice.click();
     }
 }
