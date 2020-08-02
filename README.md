@@ -10,6 +10,7 @@
 - Double click legend label to edit (click elsewhere or press Enter to finish editing)
 - Added new time points inherit the map of the previous time point (makes timeline mapping easier)
 - To use offline, you'll need to setup a local server and then open the main.html there
+- Leaflet 1.6.0 was used
 
 ### Possible uses
 - Alternate history timeline making OFC ^_^
