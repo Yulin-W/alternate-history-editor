@@ -69,10 +69,15 @@ export class MapInterface {
                 newEntry.appendChild(entryInput);
                 entryInput.click();
                 entryInput.addEventListener("focusout", () => {
-                    this.appInterface.dataStorage.entryDict[currentID]["legendData"][colourID]["entry"] = entryInput.value;
-                    labelElement.innerText = entryInput.value;
-                    newEntry.removeChild(entryInput);
-                    labelElement.style.display = "block";
+                    if (entryInput.value != "") { // Update legend label if nonempty input given
+                        this.appInterface.dataStorage.entryDict[currentID]["legendData"][colourID]["entry"] = entryInput.value;
+                        labelElement.innerText = entryInput.value;
+                        newEntry.removeChild(entryInput);
+                        labelElement.style.display = "block";
+                    } else { // Go back to original entry label
+                        newEntry.removeChild(entryInput);
+                        labelElement.style.display = "block";
+                    }
                 });
                 entryInput.addEventListener("keydown", (e) => { // Alternative means of finishing entryInput editing
                     if (e.key === "Enter") {
