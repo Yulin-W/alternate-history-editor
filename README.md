@@ -3,6 +3,7 @@
 ## Usage
 
 ### Notes
+- Loading up the tool may take some time, please be patient (or come and help refactor code to speed it up ^_^)
 - Using the admin level map will be rather laggy, so for most purposes rather use national level map
 - Double click legend label to edit (click elsewhere or press Enter to finish editing)
 - Added new time points inherit the map of the previous time point (makes timeline mapping easier)
