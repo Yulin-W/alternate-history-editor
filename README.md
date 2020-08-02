@@ -1,11 +1,16 @@
 # alternate-history-editor
 
+[Click for demo](https://yulin-w.github.io/alternate-history-editor/main.html)
+
 ## Usage
 
 ### Notes
+- Loading up the tool may take some time, please be patient (or come and help refactor code to speed it up ^_^)
 - Using the admin level map will be rather laggy, so for most purposes rather use national level map
 - Double click legend label to edit (click elsewhere or press Enter to finish editing)
 - Added new time points inherit the map of the previous time point (makes timeline mapping easier)
+- To use offline, you'll need to setup a local server and then open the main.html there
+- Leaflet 1.6.0 was used
 
 ### Possible uses
 - Alternate history timeline making OFC ^_^
