@@ -56,4 +56,4 @@ You can also download some of the sample timelines and load them into the demo t
 - More map options as opposed to just the world map (for faster speeds and also finer regional distinctions, and also to allow use for say different maps in general)
 
 ## Extra Acknowledgements
-- geoJSON Natural Earth data: martynafford (https://github.com/martynafford/natural-earth-geojson)
+- geoJSON had data originally from Natural Earth (https://www.naturalearthdata.com) and converted to geoJSON at https://geoconverter.hsr.ch/vector
