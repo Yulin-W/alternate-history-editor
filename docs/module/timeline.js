@@ -78,11 +78,13 @@ export class TimelineInterface {
         newDateCell.innerText = date;
         newDateCell.classList.add("date-cell", "button");
         newDateCell.setAttribute("contenteditable", "true");
+        newDateCell.setAttribute("tabindex", "-1"); // Disables tab selection
 
         const newEventCell = document.createElement("td");
         newEventCell.innerText = event;
         newEventCell.classList.add("event-cell", "button");
         newEventCell.setAttribute("contenteditable", "true");
+        newEventCell.setAttribute("tabindex", "-1"); // Disables tab selection
 
         newEntry.append(newDateCell);
         newEntry.append(newEventCell);
@@ -105,6 +107,7 @@ export class TimelineInterface {
     }
 
     addCellChangeListener(cell) { // Adds click event listener
+        cell.addEventListener
         cell.addEventListener("click", () => {
             this.clickCell(cell);
         });
