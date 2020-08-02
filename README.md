@@ -1,5 +1,7 @@
 # alternate-history-editor
 
+![Link to the demo](https://yulin-w.github.io/alternate-history-editor/main.html)
+
 ## Usage
 
 ### Notes
