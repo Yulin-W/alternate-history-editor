@@ -22,6 +22,9 @@
 
 ## Development
 
+### BUGS
+- Tab changeing of timeline cells (currently disabled as might cook many other coupled things relating to focused element and clicked element)
+
 ### Planned functionalities
 - [x] Timeline editor (each time point specified will have corresponding map; by default map of new time point inherits those of preceding time point)
 - [x] Map colourer (via working with Leaflet, geoJSON)
