@@ -18,6 +18,7 @@ export class Menubar {
         this.save = document.querySelector("#save");
         this.save.addEventListener("click", () => {
             // Stringifies dataStorage instance to txt for downloading
+            Object.values(this.appInterface.timelineInterface.dateCells)[0].click();
             let saveData = {
                 entryDict: this.appInterface.dataStorage.entryDict,
                 mapType: this.appInterface.dataStorage.mapType,
