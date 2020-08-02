@@ -38,6 +38,7 @@ You can also download some of the sample timelines and load them into the demo t
 
 ### Possible future additional changes (unlikely though in the near future)
 - Different map layers (e.g. terrain, population density, etc.)
+- Allow somehow to read from say images geojson, e.g. get historic borders
 - Allow entry adding that doesn't inherit previous as well for non timeline maps
 - More parameter customisation, e.g. (parts could come from the geojson data used) (much of some implementable features should already be in geojson data anyway)
   - Flag
