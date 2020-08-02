@@ -1,32 +1,31 @@
 # alternate-history-editor
 
-## Notes
+## Usage
+
+### Notes
 - Using the admin level map will be rather laggy, so for most purposes rather use national level map
-- Nation level map doesn't have nation names yet
-- Need to refactor to clean up code and split files
+- Double click legend label to edit (click elsewhere or press Enter to finish editing)
+- Added new time points inherit the map of the previous time point (makes timeline mapping easier)
 
-## BUGS
-- Admin map colouring appears to colour in everything after switching time poits
-- Need to ensure olour change upon assign, not upon mouse leaving region
-- Strange map data leak issues and causes colour assigning to cook
+### Possible uses
+- Alternate history timeline making OFC ^_^
+- Creating coloured maps in general with annotations, for say demographics and so on
 
-## Possible uses
-- Alternate history timeline OFC ^_^
-- Creating timeline of borders for the existing history (so good for say keep track of border changes for notes for history students (well, maybe))
-
-## Instructions
+### Keyboard shortcuts
 - Shift + Enter: inserts new timeline entry under currently focused entry
 - Shift + Backspace: deletes currently focused timeline entry
 
-## Planned functionalities
+## Development
+
+### Planned functionalities
 - [x] Timeline editor (each time point specified will have corresponding map; by default map of new time point inherits those of preceding time point)
 - [x] Map colourer (via working with Leaflet, geoJSON)
-- [ ] Exportable to common formats (e.g. timeline to txt, timeline & corresponding maps to word, etc.)
+- [x] Save and load files
 
-## Possible future additional changes
-- Refactoring to clean up code
+### Possible future additional changes (unlikely though in the near future)
 - Different map layers (e.g. terrain, population density, etc.)
-- More parameter customisation, e.g. (parts could come from the geojson data used)
+- Allow entry adding that doesn't inherit previous as well for non timeline maps
+- More parameter customisation, e.g. (parts could come from the geojson data used) (much of some implementable features should already be in geojson data anyway)
   - Flag
   - Population
   - GDP
@@ -36,6 +35,10 @@
 - More border customisation
 - Allow more colour choices and customisation
 - Statistics page for evaluations of land size and population to well, make one feel good lol like in civ4
+- Get a better interface theme
+- Refactor code to reduce coupling, and finish up those optional todos
+  - Ideally focus more on functional programming ideas and focus on pure functions and separate data and gui to avoid coupling
+- More map options as opposed to just the world map (for faster speeds and also finer regional distinctions, and also to allow use for say different maps in general)
 
-## Acknowledgements
+## Extra Acknowledgements
 - geoJSON Natural Earth data: martynafford (https://github.com/martynafford/natural-earth-geojson)
