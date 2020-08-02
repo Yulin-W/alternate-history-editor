@@ -1,6 +1,6 @@
 # alternate-history-editor
 
-![Link to the demo](https://yulin-w.github.io/alternate-history-editor/main.html)
+[Click for demo](https://yulin-w.github.io/alternate-history-editor/main.html)
 
 ## Usage
 
@@ -9,6 +9,7 @@
 - Using the admin level map will be rather laggy, so for most purposes rather use national level map
 - Double click legend label to edit (click elsewhere or press Enter to finish editing)
 - Added new time points inherit the map of the previous time point (makes timeline mapping easier)
+- To use offline, you'll need to setup a local server and then open the main.html there
 
 ### Possible uses
 - Alternate history timeline making OFC ^_^
