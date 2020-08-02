@@ -191,13 +191,15 @@ export class MapInterface {
             e.target.setStyle({ // Actual colouring of the feature
                 fillColor: colours[currentColour]
             });
-            if (feature.properties.colour_on_map in this.appInterface.dataStorage.entryDict[currentID]["legendData"]) {
+            if (feature.properties.colour_on_map in this.appInterface.dataStorage.entryDict[currentID]["legendData"]) { // Deals with legend data
                 this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"]--; //decrement count on the colour to be altered
                 if (this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"] === 0) { // Remove colour entry in legendData if its count becomes 0
                     delete this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map];
                 }
             }
-            if (currentColour !== "no-colour") { // Case other than where no-colour colouring option was selected
+            if (currentColour === "no-colour") { // Case of no-colouring option
+                delete this.appInterface.dataStorage.entryDict[currentID]["mapData"][feature.properties.FEATURE_ID]; // Deletes mapData entry
+            } else if (currentColour !== "no-colour") { // Case other than where no-colour colouring option was selected
                 feature.properties.colour_on_map = currentColour;
                 this.appInterface.dataStorage.entryDict[currentID]["mapData"][feature.properties.FEATURE_ID] = currentColour; // Alter mapData record for the feature
                 if (!(currentColour in this.appInterface.dataStorage.entryDict[currentID]["legendData"])) { // Deal with if the new colour isn't recorded in legendData yet
