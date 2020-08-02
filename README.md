@@ -4,6 +4,10 @@
 
 You can also download some of the sample timelines and load them into the demo to play around
 
+## Sample: The Great Penguin War
+
+![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample%20Timelines/Great%20Penguin%20War.gif)
+
 ## Usage
 
 ### Notes
