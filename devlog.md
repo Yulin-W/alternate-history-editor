@@ -26,6 +26,9 @@
   - GDP
 - GIF generation of timeline (so like those border youtube videos)
 - Loading previously made timelines
+- Show large regional labels on map
+- Search for groupingg (i think through searching for legend, and then implementing a highlight feature for moving mouse on the the legend entry perhaps)
+- Disable zooming when mouse over legend
 - Allow switching between different basemaps (with different divisions)
 - More border customisation
 - Allow custom colour choices
