@@ -9,8 +9,8 @@
 - [x] Save and load files
 
 ### Possible future additional changes (unlikely though in the near future)
-- Select colour by clicking legend colour
-- Add in app help
+- Refactor colour code to make simpler to add colours via js just from the colours js file
+- Make legend into a subclass
 - Refactor menu bar
 - Generate colouring based on uploaded images
 - Exporting to word format with timeline and images

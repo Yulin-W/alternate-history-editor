@@ -21,10 +21,6 @@ You can also download some of the sample timelines and load them into the demo t
 - Added new time points inherit the map of the previous time point (makes timeline mapping easier)
 - To use offline, you'll need to setup a local server and then open the main.html there
 
-### Keyboard shortcuts
-- Shift + Enter: inserts new timeline entry under currently focused entry
-- Shift + Backspace: deletes currently focused timeline entry
-
 ### Possible uses
 - Alternate history timeline making OFC ^_^
 - Creating coloured maps in general with annotations, for say demographics and so on
