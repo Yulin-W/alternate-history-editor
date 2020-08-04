@@ -64,6 +64,9 @@ export class MapInterface {
             newEntry.appendChild(colourElement);
             newEntry.appendChild(labelElement);
             this.legend._container.appendChild(newEntry);
+
+            // Updates the borders of color toolbar to doubel border to show on map
+            this.mapToolbar.colourOptionDict[colourID].classList.add("on-map");
         });;
     }
 
