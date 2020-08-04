@@ -93,6 +93,7 @@ td {
 #toolbar {
     width: 100%;
     border-bottom: solid gray 2px;
+    height: 10vh;
 }
 
 #map {
@@ -104,14 +105,18 @@ td {
 .legend {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     line-height: 18px;
     color: #555;
+    overflow-x: scroll;
+    max-height: 30vh;
+    max-width: 30vh;
 }
 
 .legend-entry {
     display: flex;
     flex-direction: row;
-    margin: 2px 0px;
+    margin: 2px 5px;
 }
 
 .legend i {
@@ -126,16 +131,9 @@ td {
 
 .info {
     padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-}
-
-.info h4 {
-    margin: 0 0 5px;
-    color: #777;
 }
 
 #colour-choice {
@@ -145,6 +143,7 @@ td {
     justify-content: start;
     height: 100%;
     width: 100%;
+    overflow-y: scroll;
 }
 
 .colour {

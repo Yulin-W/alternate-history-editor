@@ -24,6 +24,31 @@ export class MapInterface {
         this.initialiseFeatureID();
         this.addFeatureListeners();
         this.initialiseLegend();
+        this.initialiseInfo();
+    }
+
+    initialiseInfo() { // Sets up the hover over region info, currently gives label in legend
+        this.info = null;
+        this.info = L.control();
+        this.info.onAdd = function(map) {;
+            this._div = L.DomUtil.create("div", "info")
+            return this._div;
+        };
+        this.info.addTo(this.map);
+        this.updateInfo();
+    }
+
+    updateInfo(properties, legendData) {
+        if (properties) { // Check if properties is defined
+            if (properties.colour_on_map in legendData) {
+                this.info._div.innerHTML = legendData[properties.colour_on_map]["entry"];
+            }
+            else {
+                this.info._div.innerHTML = "Unlabelled";
+            }
+        } else {
+            this.info._div.innerHTML = "Hover over a region to see its label";
+        }
     }
 
     initialiseLegend() {
@@ -178,6 +203,7 @@ export class MapInterface {
 
     highlightFeature(e) {
         var layer = e.target;
+        let currentID = this.appInterface.timelineInterface.currentID;
 
         layer.setStyle({
             weight: 2,
@@ -188,6 +214,8 @@ export class MapInterface {
         if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
             layer.bringToFront();
         }
+
+        this.updateInfo(layer.feature.properties, this.appInterface.dataStorage.entryDict[currentID]["legendData"]);
     }
 
     resetHighlight(e) {
@@ -195,6 +223,7 @@ export class MapInterface {
             weight: 1,
             color: 'gray',
         });
+        this.updateInfo();
     }
 
     clickFeature(e) { // TODO: refactor to simplify
