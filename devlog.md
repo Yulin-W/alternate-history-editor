@@ -16,6 +16,8 @@
 - Importing not entire timelines but only single timepoint or multiple from a timeline file to next cell (Suggest focus on dis as helps merge timeline files)
 - Different map layers (e.g. terrain, population density, etc.)
 - Allow somehow to read from say images geojson, e.g. get historic borders
+- Allow shuffling timeline order around
+- Allow timeline duplication entries
 - Allow entry adding that doesn't inherit previous as well for non timeline maps
 - More parameter customisation, e.g. (parts could come from the geojson data used) (much of some implementable features should already be in geojson data anyway)
   - Flag
