@@ -256,6 +256,7 @@ export class MapInterface {
                 this.appInterface.dataStorage.entryDict[currentID]["legendData"][currentColour]["count"]++; // increment count on the colour to be altered
             }
             this.updateLegend(this.appInterface.timelineInterface.currentID);
+            this.updateInfo(feature.properties, this.appInterface.dataStorage.entryDict[currentID]["legendData"]);
         }
     }
 }
