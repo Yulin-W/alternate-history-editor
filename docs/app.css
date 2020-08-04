@@ -148,7 +148,7 @@ td {
 }
 
 .colour {
-    border: black double 3px;
+    border: lightgray groove 3px;
     border-radius: 2px;
     text-align: center;
     display: block;
@@ -160,7 +160,12 @@ td {
     max-width: 15px;
 }
 
+.colour.on-map {
+    border: black 3px double;
+}
+
 .colour.active {
+    /*This defined after above as the class property active should take priority over on-map for border*/
     border: black 3px solid;
 }
 

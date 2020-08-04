@@ -18,6 +18,7 @@
 - Allow somehow to read from say images geojson, e.g. get historic borders
 - Allow shuffling timeline order around
 - Allow timeline duplication entries
+- Change colours from legend
 - Allow entry adding that doesn't inherit previous as well for non timeline maps
 - More parameter customisation, e.g. (parts could come from the geojson data used) (much of some implementable features should already be in geojson data anyway)
   - Flag

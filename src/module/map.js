@@ -165,7 +165,7 @@ export class MapInterface {
     style(feature) {
         return {
             fillColor: 'white',
-            weight: 0.5,
+            weight: 1,
             opacity: 1,
             color: 'gray',
             dashArray: '',
@@ -177,7 +177,7 @@ export class MapInterface {
         var layer = e.target;
 
         layer.setStyle({
-            weight: 1,
+            weight: 2,
             color: 'black',
             dashArray: '',
         });
@@ -189,7 +189,7 @@ export class MapInterface {
 
     resetHighlight(e) {
         e.target.setStyle({
-            weight: 0.5,
+            weight: 1,
             color: 'gray',
         });
     }
@@ -206,6 +206,7 @@ export class MapInterface {
                 this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"]--; //decrement count on the colour to be altered
                 if (this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"] === 0) { // Remove colour entry in legendData if its count becomes 0
                     delete this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map];
+                    this.mapToolbar.colourOptionDict[feature.properties.colour_on_map].classList.remove("on-map"); // Changes look of corresponding colour on colour choice to signal not on map anymore
                 }
             }
             if (currentColour === "no-colour") { // Case of no-colouring option
@@ -217,7 +218,8 @@ export class MapInterface {
                     this.appInterface.dataStorage.entryDict[currentID]["legendData"][currentColour] = {
                         count: 0,
                         entry: "Label"
-                    }
+                    };
+                    this.mapToolbar.colourOptionDict[feature.properties.colour_on_map].classList.add("on-map"); // Changes look on colour choice for corresponding colour to signal on map
                 }
                 this.appInterface.dataStorage.entryDict[currentID]["legendData"][currentColour]["count"]++; // increment count on the colour to be altered
             }
