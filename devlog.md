@@ -9,7 +9,6 @@
 - [x] Save and load files
 
 ### Possible future additional changes (unlikely though in the near future)
-- Refactor colour code to make simpler to add colours via js just from the colours js file
 - Make legend into a subclass
 - Refactor menu bar
 - Generate colouring based on uploaded images
@@ -28,7 +27,7 @@
 - Loading previously made timelines
 - Allow switching between different basemaps (with different divisions)
 - More border customisation
-- Allow more colour choices and customisation
+- Allow custom colour choices
 - Statistics page for evaluations of land size and population to well, make one feel good lol like in civ4
 - Get a better interface theme
 - Refactor code to reduce coupling, and finish up those optional todos

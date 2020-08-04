@@ -48,37 +48,53 @@ export class MapInterface {
         Object.keys(legendData).forEach(colourID => {
             const newEntry = document.createElement("div");
             newEntry.classList.add("legend-entry");
-            newEntry.innerHTML = '<i style="background:' + colours[colourID] + '"></i>';
+            const colourElement = document.createElement("div");
+            colourElement.innerHTML = '<i style="background:' + colours[colourID] + '"></i>';
+            // Selecting colour from legend
+            colourElement.addEventListener("click", () => {
+                this.selectColourByLegend(colourID);
+            });
             const labelElement = document.createElement("div");
             labelElement.innerText = legendData[colourID]["entry"];
-            labelElement.addEventListener("dblclick", () => { // Functionality for editing and updating labels
-                let entryInput = document.createElement("input");
-                entryInput.classList.add("entry-input");
-                entryInput.setAttribute("type", "text");
-                entryInput.placeholder = labelElement.innerText;
-                labelElement.style.display = "none";
-                newEntry.appendChild(entryInput);
-                entryInput.click();
-                entryInput.addEventListener("focusout", () => {
-                    if (entryInput.value != "") { // Update legend label if nonempty input given
-                        this.appInterface.dataStorage.entryDict[currentID]["legendData"][colourID]["entry"] = entryInput.value;
-                        labelElement.innerText = entryInput.value;
-                        newEntry.removeChild(entryInput);
-                        labelElement.style.display = "block";
-                    } else { // Go back to original entry label
-                        newEntry.removeChild(entryInput);
-                        labelElement.style.display = "block";
-                    }
-                });
-                entryInput.addEventListener("keydown", (e) => { // Alternative means of finishing entryInput editing
-                    if (e.key === "Enter") {
-                        e.target.blur();
-                    }
-                });
+
+            // Functionality for editing and updating labels
+            labelElement.addEventListener("dblclick", () => {
+                this.legendLabelEdit(colourID, currentID, newEntry, labelElement);
             });
+            newEntry.appendChild(colourElement);
             newEntry.appendChild(labelElement);
             this.legend._container.appendChild(newEntry);
         });;
+    }
+
+    selectColourByLegend(colourID) { // Selects clicked colour in legend as current colour
+        this.mapToolbar.colourOptionDict[colourID].click();
+    }
+
+    legendLabelEdit(colourID, currentID, newEntry, labelElement) { // Edits label for a entry in a legend
+        let entryInput = document.createElement("input");
+        entryInput.classList.add("entry-input");
+        entryInput.setAttribute("type", "text");
+        entryInput.placeholder = labelElement.innerText;
+        labelElement.style.display = "none";
+        newEntry.appendChild(entryInput);
+        entryInput.focus(); // Note click seems to not go into edit mode of input, so needed focus() instead
+        entryInput.addEventListener("focusout", () => {
+            if (entryInput.value != "") { // Update legend label if nonempty input given
+                this.appInterface.dataStorage.entryDict[currentID]["legendData"][colourID]["entry"] = entryInput.value;
+                labelElement.innerText = entryInput.value;
+                newEntry.removeChild(entryInput);
+                labelElement.style.display = "block";
+            } else { // Go back to original entry label
+                newEntry.removeChild(entryInput);
+                labelElement.style.display = "block";
+            }
+        });
+        entryInput.addEventListener("keydown", (e) => { // Alternative means of finishing entryInput editing
+            if (e.key === "Enter") {
+                e.target.blur();
+            }
+        });
     }
 
     addFeatureListeners() {

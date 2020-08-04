@@ -47,6 +47,17 @@ export class Menubar {
         this.load.addEventListener("click", () => {
             this.loadFile();
         });
+        this.help = document.querySelector("#help");
+        this.helpModal = document.querySelector("#help-modal");
+        this.helpModalClose = this.helpModal.getElementsByClassName("close")[0];
+        this.help.addEventListener("click", () => { // Open help when click
+            this.helpModal.style.visibility = "visible";
+            this.helpModal.style.opacity = 1;
+        });
+        this.helpModalClose.addEventListener("click", () => { // Close help when click close
+            this.helpModal.style.visibility = "hidden";
+            this.helpModal.style.opacity = 0;
+        });
     }
 
     saveFile(filename, text) {

@@ -21,6 +21,17 @@
                 Load
                 <input type="file" class="file-choice" style="display:none">
             </li>
+            <li class="button" id="help">Help</li>
+            <div id="help-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p>Choose a colour: either from colour bar above map or from legend</p>
+                    <p>Colour region: choose a colour and a date, then simply click the region</p>
+                    <p>Add date/event entry: Shift + Enter</p>
+                    <p>Delete date/evvent entry: Shift + Backspace</p>
+                    <p>Edit legend labels: double click label text</p>
+                </div>
+            </div>
         </ul>
     </nav>
     <main>
@@ -37,33 +48,12 @@
         </div>
         <div id="map-editor">
             <nav id="toolbar">
-                <ul id="colour-choice">
-                    <li class="colour" id="no-colour"></li>
-                    <li class="colour" id="white"></li>
-                    <li class="colour" id="gray"></li>
-                    <li class="colour" id="black"></li>
-                    <li class="colour" id="red"></li>
-                    <li class="colour" id="crimson"></li>
-                    <li class="colour" id="ruby"></li>
-                    <li class="colour" id="yellow"></li>
-                    <li class="colour" id="fire"></li>
-                    <li class="colour" id="gold"></li>
-                    <li class="colour" id="lime"></li>
-                    <li class="colour" id="persian-green"></li>
-                    <li class="colour" id="basil"></li>
-                    <li class="colour" id="navy"></li>
-                    <li class="colour" id="sky-blue"></li>
-                    <li class="colour" id="persian-blue"></li>
-                    <li class="colour" id="lavender"></li>
-                    <li class="colour" id="tyrian-purple"></li>
-                    <li class="colour" id="wine"></li>
-                    <li class="colour" id="brown"></li>
-                    <li class="colour" id="more-colour" </ul>
+                <ul id="colour-choice"></ul>
             </nav>
             <div id="map"></div>
         </div>
     </main>
-    <footer>Made by Yulin W</footer>
+    <footer>Made by Yulin W; source code at https://github.com/Yulin-W/alternate-history-editor</footer>
 </body>
 
 </html>

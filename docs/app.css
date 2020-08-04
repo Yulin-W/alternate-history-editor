@@ -3,6 +3,7 @@ body {
     padding: 0;
     margin: 0;
     height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -90,12 +91,14 @@ td {
 }
 
 #toolbar {
-    height: 25px;
     width: 100%;
+    border-bottom: solid gray 2px;
 }
 
 #map {
     height: 90%;
+    z-index: 0;
+    /* So that it doesn't compete over the help popup*/
 }
 
 .legend {
@@ -137,26 +140,28 @@ td {
 
 #colour-choice {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     height: 100%;
     width: 100%;
 }
 
 .colour {
-    border: whitesmoke 1px solid;
+    border: black double 3px;
+    border-radius: 2px;
+    text-align: center;
     display: block;
+    padding: 0;
     margin: 2px 1px;
-    height: 90%;
-    width: 4.5%;
+    min-height: 20px;
+    max-height: 20px;
+    min-width: 20px;
+    max-width: 20px;
 }
 
 .colour.active {
-    border: black 2px solid;
-}
-
-#no-colour {
-    background-color: white;
+    border: black 3px solid;
 }
 
 #no-colour:after {
@@ -167,100 +172,12 @@ td {
     color: red;
 }
 
-#custom-colour label {
-    padding: 0;
-    margin: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-#custom-colour input {
-    display: none;
-}
-
-#white {
-    background-color: white;
-}
-
-#gray {
-    background-color: gray;
-}
-
-#silver {
-    background-color: silver;
-}
-
-#black {
-    background-color: black;
-}
-
-#red {
-    background-color: red;
-}
-
-#crimson {
-    background-color: crimson;
-}
-
-#ruby {
-    background-color: #9B111E;
-}
-
-#yellow {
-    background-color: yellow;
-}
-
-#fire {
-    background-color: #e25822;
-}
-
-#gold {
-    background-color: gold;
-}
-
-#lime {
-    background-color: lime;
-}
-
-#persian-green {
-    background-color: #00A693;
-}
-
-#basil {
-    background-color: #579229;
-}
-
-#navy {
-    background-color: navy;
-}
-
-#sky-blue {
-    background-color: skyblue;
-}
-
-#persian-blue {
-    background-color: #1C39BB;
-}
-
-#lavender {
-    background-color: lavender;
-}
-
-#tyrian-purple {
-    background-color: #66023C;
-}
-
-#wine {
-    background-color: #722f37;
-}
-
-#brown {
-    background-color: brown;
-}
-
 
 /*Functionality*/
+
+.button {
+    transition: all 0.2s ease-out;
+}
 
 .button:hover {
     filter: brightness(80%);
@@ -268,4 +185,59 @@ td {
 
 .button.active {
     filter: brightness(80%);
+}
+
+.modal {
+    display: block;
+    transition: opacity 0.5s linear;
+    visibility: hidden;
+    opacity: 0;
+    /* Hidden by default; the opacity is to allow for transtitions as display from none to block alone doesn't transit*/
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+    border-radius: 20px;
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
