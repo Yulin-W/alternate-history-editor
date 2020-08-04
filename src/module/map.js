@@ -1,6 +1,7 @@
 import { colours } from './colours.js';
 import { geojson_nation } from './map_nation.js';
 import { geojson_admin } from './map_admin.js';
+import { MapToolbar } from './map_toolbar.js';
 
 // Map editor interface
 
@@ -8,17 +9,7 @@ export class MapInterface {
     constructor(appInterface) {
         this.appInterface = appInterface; // TODO: I feel that doing this is not a good idea, but can't think of easier way for classes in composition to communciate witht he main class
         this.mapEditor = document.querySelector("#map-editor");
-        this.colourChooser = document.querySelector("#colour-choice");
-        this.colourOptions = document.querySelectorAll(".colour");
-        this.currentColour = null;
-        this.colourOptions.forEach(colour => {
-            colour.addEventListener("click", () => {
-                if (this.currentColour)
-                    this.currentColour.classList.remove("active");
-                colour.classList.add("active");
-                this.currentColour = colour;
-            });
-        });
+        this.mapToolbar = new MapToolbar(this);
         this.setupMap();
     }
 
@@ -187,12 +178,11 @@ export class MapInterface {
         });
     }
 
-    clickFeature(e) {
-        if (this.appInterface.mapInterface.currentColour && this.appInterface.timelineInterface.currentDate) {
+    clickFeature(e) { // TODO: refactor to simplify
+        if (this.mapToolbar.currentColour && this.appInterface.timelineInterface.currentDate) { // Given there is a current colour and current date selected
             let currentID = this.appInterface.timelineInterface.currentID;
             let feature = e.target.feature;
-            let currentColour = this.appInterface.mapInterface.currentColour.id;
-
+            let currentColour = this.mapToolbar.currentColour.id; // id of the currentColour element.
             e.target.setStyle({ // Actual colouring of the feature
                 fillColor: colours[currentColour]
             });
