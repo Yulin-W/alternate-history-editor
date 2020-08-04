@@ -149,14 +149,14 @@ export class MapInterface {
                     layer.feature.properties.colour_on_map = mapData[layerID];
                 } else {
                     layer.setStyle({
-                        fillColor: "silver"
+                        fillColor: colours["no-colour"]
                     });
                 }
             });
         } else {
             Object.values(this.geojson._layers).forEach(layer => {
                 layer.setStyle({
-                    fillColor: "silver"
+                    fillColor: colours["no-colour"]
                 });
             });
         }
@@ -165,7 +165,7 @@ export class MapInterface {
     style(feature) {
         return {
             fillColor: 'white',
-            weight: 1,
+            weight: 0.5,
             opacity: 1,
             color: 'gray',
             dashArray: '',
@@ -177,7 +177,7 @@ export class MapInterface {
         var layer = e.target;
 
         layer.setStyle({
-            weight: 2,
+            weight: 1,
             color: 'black',
             dashArray: '',
         });
@@ -189,7 +189,7 @@ export class MapInterface {
 
     resetHighlight(e) {
         e.target.setStyle({
-            weight: 1,
+            weight: 0.5,
             color: 'gray',
         });
     }
