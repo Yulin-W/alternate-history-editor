@@ -40,14 +40,15 @@ export class MapInterface {
 
     updateInfo(properties, legendData) {
         if (properties) { // Check if properties is defined
+            this.info._div.innerHTML = "Name: " + properties["name"] + "<br>";
             if (properties.colour_on_map in legendData) {
-                this.info._div.innerHTML = legendData[properties.colour_on_map]["entry"];
+                this.info._div.innerHTML += legendData[properties.colour_on_map]["entry"];
             }
             else {
-                this.info._div.innerHTML = "Unlabelled";
+                this.info._div.innerHTML += "Unlabelled";
             }
         } else {
-            this.info._div.innerHTML = "Hover over a region to see its label";
+            this.info._div.innerHTML += "Hover over a region to see its name and label";
         }
     }
 
