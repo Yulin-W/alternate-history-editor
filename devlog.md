@@ -34,6 +34,8 @@
 - More border customisation
 - Allow custom colour choices
 - Statistics page for evaluations of land size and population to well, make one feel good lol like in civ4
+- Cinematics mode for playing like a powerpoint with some transitions
+- Automatic gif generation
 - Get a better interface theme
 - Refactor code to reduce coupling, and finish up those optional todos
   - Ideally focus more on functional programming ideas and focus on pure functions and separate data and gui to avoid coupling
