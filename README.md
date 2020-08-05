@@ -6,6 +6,7 @@ You can also download some of the sample timelines and load them into the demo t
 
 ## Historic (Approximately) Scenarios
 Click links to download scenarios; note certain browsers may open the files directly, in which case usually right click save-as will have the file downloaded
+Note: some of the below gifs were recorded with older versions of the app; thus map appearance may differ now (regions though stay the same)
 
 Note: scenarios are not guranteed to be historically accurate nor do they represent personal views of the author
 [1444AD: Battle of Varna](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/1444AD-Battle-of-Varna.json)
