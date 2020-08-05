@@ -214,15 +214,23 @@ export class MapInterface {
         if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
             layer.bringToFront();
         }
-
+        if ("colour_on_map" in layer.feature.properties) {
+            this.mapToolbar.colourOptionDict[layer.feature.properties.colour_on_map].classList.add("hovered-on"); // Identifies which colour the region is
+            this.hadPrevHovered = true; // Keep a status for faster removal fo hovered status
+            this.prevHovered = this.mapToolbar.colourOptionDict[layer.feature.properties.colour_on_map] // Keep a reference to the colour for faster class removal later
+        }
         this.updateInfo(layer.feature.properties, this.appInterface.dataStorage.entryDict[currentID]["legendData"]);
     }
 
     resetHighlight(e) {
-        e.target.setStyle({
+        let layer = e.target;
+        layer.setStyle({
             weight: 1,
             color: 'gray',
         });
+        if (this.hadPrevHovered) {
+            this.prevHovered.classList.remove("hovered-on");
+        }
         this.updateInfo();
     }
 
