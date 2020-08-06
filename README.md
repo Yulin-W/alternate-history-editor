@@ -2,6 +2,8 @@
 
 [Click for demo](https://yulin-w.github.io/alternate-history-editor/main.html)
 
+[Click for equirectangular projection demo](https://yulin-w.github.io/alternate-history-editor/rect-proj-ver/main.html)
+
 You can also download some of the sample timelines and load them into the demo to play around
 
 ## Historic (Approximately) Scenarios
