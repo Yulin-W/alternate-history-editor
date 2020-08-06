@@ -1,4 +1,8 @@
+//TODO: reorganise the code in here, too clunky
+
 import { colours } from './colours.js';
+import {geojson_rivers} from '../assets/layers/rivers.js'
+import {geojson_lakes} from '../assets/layers/lakes.js'
 import { geojson_nation } from './map_nation.js';
 import { geojson_admin } from './map_admin.js';
 import { MapToolbar } from './map_toolbar.js';
@@ -20,22 +24,66 @@ export class MapInterface {
         // TODO: consider adding a optiions page to allow options such as adding underneath a OpenStreat map or terrain map or whatever
         this.geojson = L.geoJSON(geojson_nation, {
             style: this.style,
-        }).addTo(this.map);
+        }).addTo(this.map); // Here added to map as it is the default base
+        // Initialise overlays
+        this.initialiseGeoOverlay();
+        this.initialiseLakesOverlay();
+        this.initialiseRiversOverlay();
+
+        // Add layer control
+        this.baseLayers = {
+            "Base Map": this.geojson,
+        }
+        this.overlayers = {
+            "Geographic": this.geoOverlay,
+            "Lakes": this.lakesOverlay,
+            "Rivers": this.riversOverlay,
+        }
+        this.layerControl = L.control.layers(this.baseLayers, this.overlayers).addTo(this.map);
+        this.layerControl.setPosition("topleft");
+
+        // Other initialisations
         this.initialiseFeatureID();
         this.addFeatureListeners();
         this.initialiseLegend();
         this.initialiseInfo();
     }
 
+    bringOverlayForward(overlayID) {
+        this.overlayers[overlayID].bringToFront();
+    }
+
+    bringOverlayBack(overlayID) {
+        this.overlayers[overlayID].bringToBack();
+    }
+
     initialiseInfo() { // Sets up the hover over region info, currently gives label in legend
         this.info = null;
         this.info = L.control();
-        this.info.onAdd = function(map) {;
-            this._div = L.DomUtil.create("div", "info")
+        this.info.onAdd = function(map) {
+            this._div = L.DomUtil.create("div", "info");
             return this._div;
         };
         this.info.addTo(this.map);
         this.updateInfo();
+    }
+
+    initialiseRiversOverlay() { // adds riverss map overlay
+        this.riversOverlay = L.geoJSON(geojson_rivers);
+    }
+
+    initialiseLakesOverlay() { // adds lakes map overlay
+        this.lakesOverlay = L.geoJSON(geojson_lakes);
+    }
+
+    initialiseGeoOverlay() { // adds geographic map underlay
+        this.geoOverlay = L.imageOverlay(
+            "./assets/layers/mercator-topographic.jpg",
+            L.latLngBounds(
+                L.latLng(85.5,-180.2),
+                L.latLng(-85.5,180)
+            ),
+        ).addTo(this.map); // As this is the default
     }
 
     updateInfo(properties, legendData) {
@@ -48,7 +96,7 @@ export class MapInterface {
                 this.info._div.innerHTML += "Unlabelled";
             }
         } else {
-            this.info._div.innerHTML += "Hover over a region to see its name and label";
+            this.info._div.innerHTML = "Hover over a region to see its name and label";
         }
     }
 
@@ -153,6 +201,7 @@ export class MapInterface {
         //TODO: this and setupMap method are sharing too much in common, peryhaps make a new function
         let mapType = this.appInterface.dataStorage.mapType;
         this.map.removeLayer(this.geojson);
+        this.layerControl.removeLayer(this.geojson);
         if (mapType === "nation") {
             this.geojson = L.geoJSON(geojson_nation, {
                 style: this.style,
@@ -162,6 +211,8 @@ export class MapInterface {
                 style: this.style,
             }).addTo(this.map);
         }
+        this.geojson.bringToBack(); // This is to ensure that the overlay features are always visible above the map surface (note though the base image features seems to stay under, not sure why, but I'd like that anyway TODO: check why image stays under)
+        this.layerControl.addBaseLayer(this.geojson, "Base Map");
         this.initialiseFeatureID();
         this.addFeatureListeners();
         this.resetLegend();
@@ -199,7 +250,7 @@ export class MapInterface {
             opacity: 1,
             color: 'gray',
             dashArray: '',
-            fillOpacity: 1
+            fillOpacity: 0.6
         };
     }
 
@@ -213,9 +264,6 @@ export class MapInterface {
             dashArray: '',
         });
 
-        if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-            layer.bringToFront();
-        }
         if ("colour_on_map" in layer.feature.properties) {
             this.mapToolbar.colourOptionDict[layer.feature.properties.colour_on_map].classList.add("hovered-on"); // Identifies which colour the region is
             this.hadPrevHovered = true; // Keep a status for faster removal fo hovered status

@@ -1,6 +1,8 @@
 export class Menubar {
     constructor(appInterface) {
         this.appInterface = appInterface; // TODO: I feel that doing this is not a good idea, but can't think of easier way for classes in composition to communciate witht he main class
+
+        // New admin map button
         this.newAdmin = document.querySelector("#new-admin");
         this.newAdmin.addEventListener("click", () => {
             this.appInterface.dataStorage.resetEntryDict();
@@ -8,6 +10,8 @@ export class Menubar {
             this.appInterface.mapInterface.resetMap();
             this.appInterface.timelineInterface.resetTimeline();
         });
+
+        // New nation map button
         this.newNation = document.querySelector("#new-nation");
         this.newNation.addEventListener("click", () => {
             this.appInterface.dataStorage.resetEntryDict();
@@ -15,6 +19,8 @@ export class Menubar {
             this.appInterface.mapInterface.resetMap();
             this.appInterface.timelineInterface.resetTimeline();
         });
+
+        // Save button
         this.save = document.querySelector("#save");
         this.save.addEventListener("click", () => {
             // Stringifies dataStorage instance to txt for downloading
@@ -26,6 +32,8 @@ export class Menubar {
             };
             this.saveFile("timeline.json", JSON.stringify(saveData));
         });
+
+        // Load button
         this.load = document.querySelector("#load");
         this.fileChoice = this.load.querySelector(".file-choice");
         this.fileChoice.addEventListener("change", () => { // Setup file load TODO: move dis to a function I'd say
@@ -47,6 +55,8 @@ export class Menubar {
         this.load.addEventListener("click", () => {
             this.loadFile();
         });
+
+        // Help button
         this.help = document.querySelector("#help");
         this.helpModal = document.querySelector("#help-modal");
         this.helpModalClose = this.helpModal.getElementsByClassName("close")[0];
@@ -58,6 +68,46 @@ export class Menubar {
             this.helpModal.style.visibility = "hidden";
             this.helpModal.style.opacity = 0;
         });
+
+        // Initialise options holder dict
+        this.optionsDict = {
+            underLay: "geo",
+        };
+
+        // Options button
+        this.initialiseOptions();
+        this.updateOptions(this.optionsDict);
+
+    }
+
+    initialiseOptions() { // Initialise options button
+        this.options = document.querySelector("#options");
+        this.optionsModal = document.querySelector("#options-modal");
+        this.optionsModalClose = this.optionsModal.getElementsByClassName("close")[0];
+        this.optionsItems = this.optionsModal.querySelectorAll(".option-item");
+        this.optionSettings = {};
+        this.writeOptions();
+        this.updateOptions();
+
+        this.options.addEventListener("click", () => { // Open help when click
+            this.optionsModal.style.visibility = "visible";
+            this.optionsModal.style.opacity = 1;
+        });
+        this.optionsModalClose.addEventListener("click", () => { // Close help when click close
+            this.optionsModal.style.visibility = "hidden";
+            this.optionsModal.style.opacity = 0;
+            this.writeOptions();
+            this.updateOptions();
+        });
+    }
+
+    writeOptions() { // Writes options in option input to options dict
+        this.optionsItems.forEach(item => {
+            this.optionSettings[item.id] = item.checked;
+        });
+    }
+
+    updateOptions(optionsDict) { // Updates underlying options based on options dict input
     }
 
     saveFile(filename, text) {

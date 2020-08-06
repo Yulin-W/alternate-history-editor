@@ -25,6 +25,8 @@
             <div id="help-modal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
+                    <h1>General</h1>
+                    <p>Use top left layer button to change between options</p>
                     <h1>Colouring</h1>
                     <p>Currently chosen colour will have a solid black border and be protruding</p>
                     <p>Colour of currently hovered over region will have a dashed black border and be protruding</p>
@@ -36,6 +38,16 @@
                     <p>Delete date/event entry: Shift + Backspace</p>
                     <h1>Map features</h1>
                     <p>Edit legend labels: double click label text</p>
+                </div>
+            </div>
+            <li class="button" id="options">Options</li>
+            <div id="options-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <div>
+                        <input class="option-item" type="checkbox" id="geo-map" name="geo-map" checked>
+                        <label for="geo-map">Geographic map underlay</label>
+                    </div>
                 </div>
             </div>
         </ul>

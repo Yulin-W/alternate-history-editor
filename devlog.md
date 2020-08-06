@@ -9,6 +9,11 @@
 - [x] Save and load files
 
 ### Possible future additional changes (unlikely though in the near future)
+- Improve speed and responsiveness of leaflet
+- Easier colouring
+  - Colour surrounding adjacent regions
+  - Click and drag colouring of regions passed through
+  - Region draw circling colour all within
 - Make legend into a subclass
 - Refactor menu bar
 - Generate colouring based on uploaded images
@@ -25,7 +30,7 @@
   - Population
   - GDP
 - GIF generation of timeline (so like those border youtube videos)
-- Unmap label functionality
+- Onmap label functionality
 - Loading previously made timelines
 - Show large regional labels on map
 - Search for groupingg (i think through searching for legend, and then implementing a highlight feature for moving mouse on the the legend entry perhaps)

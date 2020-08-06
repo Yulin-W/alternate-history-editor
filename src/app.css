@@ -45,12 +45,21 @@ td {
     border-collapse: collapse;
 }
 
+/*Menubar*/
+
+
 #menubar {
     border-bottom: 2px black solid;
 }
 
 #menubar li {
     padding: 3px 8px;
+}
+
+#options-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
 }
 
 
@@ -229,17 +238,17 @@ td {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 30% auto;
     /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 60%;
     /* Could be more or less, depending on screen size */
     border-radius: 20px;
 }
 
 
-/* The Close Button */
+/* The Close Button for modals*/
 
 .close {
     color: #aaa;

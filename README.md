@@ -33,4 +33,9 @@ Note: scenarios are not guranteed to be historically accurate nor do they repres
 - Creating coloured maps in general with annotations, for say demographics and so on
 
 ## Extra Acknowledgements
-- geoJSON had data originally from Natural Earth (https://www.naturalearthdata.com) and converted to geoJSON at https://geoconverter.hsr.ch/vector
+- "map_admin.js", "map_nation.js", "lakes.js", "rivers.js" were modified from:
+  - Data source: Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com. 
+  - Data transformed to geoJSON at https://geoconverter.hsr.ch/vector, provided by Geometa Lab at IFS HSR
+- "mercator-topographic.jpg" made by Daniel R. Strebe; 08:03, 17 December 2011; retrieved from "https://commons.wikimedia.org/wiki/File:Mercator_projection_Square.JPG"
+  - Link to license: https://creativecommons.org/licenses/by-sa/3.0/deed.en
+  - Modifications made: trimmed white outer borders
