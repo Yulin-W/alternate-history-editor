@@ -6,6 +6,9 @@
 
 You can also download some of the sample timelines and load them into the demo to play around
 
+## Sample alternate history
+![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample-gifs/alternate_hist_sample.gif)
+
 ## Historic (Approximately) Scenarios
 Click links to download scenarios; note certain browsers may open the files directly, in which case usually right click save-as will have the file downloaded
 
