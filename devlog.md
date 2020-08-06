@@ -9,6 +9,7 @@
 - [x] Save and load files
 
 ### Possible future additional changes (unlikely though in the near future)
+- Projection changing dynamically? so save all settings as a temporary variable, and reset entire map
 - Improve speed and responsiveness of leaflet
 - Easier colouring
   - Colour surrounding adjacent regions
