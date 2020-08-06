@@ -246,8 +246,6 @@ export class MapInterface {
             console.log(feature.properties.colour_on_map);
             if (feature.properties.colour_on_map in this.appInterface.dataStorage.entryDict[currentID]["legendData"]) { // Deals with legend data
                 this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"]--; //decrement count on the colour to be altered
-                console.log(this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"]);
-                console.log(this.appInterface.dataStorage.entryDict[currentID]["legendData"]);
                 if (this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"] === 0) { // Remove colour entry in legendData if its count becomes 0
                     delete this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map];
                     this.mapToolbar.colourOptionDict[feature.properties.colour_on_map].classList.remove("on-map"); // Changes look of corresponding colour on colour choice to signal not on map anymore
@@ -267,8 +265,6 @@ export class MapInterface {
                     this.mapToolbar.colourOptionDict[feature.properties.colour_on_map].classList.add("on-map"); // Changes look on colour choice for corresponding colour to signal on map
                 }
                 this.appInterface.dataStorage.entryDict[currentID]["legendData"][currentColour]["count"]++; // increment count on the colour to be altered
-                console.log(this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"]);
-                console.log(this.appInterface.dataStorage.entryDict[currentID]["legendData"]);
             }
             this.updateLegend(this.appInterface.timelineInterface.currentID);
             this.updateInfo(feature.properties, this.appInterface.dataStorage.entryDict[currentID]["legendData"]);
