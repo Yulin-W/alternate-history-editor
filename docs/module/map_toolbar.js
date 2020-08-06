@@ -22,4 +22,10 @@ export class MapToolbar {
             });
         });
     }
+
+    resetColourBorders() { // Resets all colour option borders by removing all on-map tags, but not current colour though nor hovered on
+        Object.values(this.colourOptionDict).forEach(colour => {
+            colour.classList.remove("on-map");
+        });
+    }
 }

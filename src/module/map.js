@@ -67,10 +67,11 @@ export class MapInterface {
         this.legend._container.innerHTML = "";
     }
 
-    updateLegend(currentID) { // Updates based on the data stored in dataStorage under appInterface given specified ID
+    updateLegend(currentID) { // Updates based on the data stored in dataStorage under appInterface given specified ID, also updates the color toolbar borders correspondingly
         // TODO: not the most efficient tbh as has to loop over legendData entirely
         this.legend._container.innerHTML = ""; // Clear out legend
         let legendData = this.appInterface.dataStorage.entryDict[currentID]["legendData"];
+        this.mapToolbar.resetColourBorders();
         Object.keys(legendData).forEach(colourID => {
             const newEntry = document.createElement("div");
             newEntry.classList.add("legend-entry");
@@ -243,7 +244,6 @@ export class MapInterface {
             e.target.setStyle({ // Actual colouring of the feature
                 fillColor: colours[currentColour]
             });
-            console.log(feature.properties.colour_on_map);
             if (feature.properties.colour_on_map in this.appInterface.dataStorage.entryDict[currentID]["legendData"]) { // Deals with legend data
                 this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"]--; //decrement count on the colour to be altered
                 if (this.appInterface.dataStorage.entryDict[currentID]["legendData"][feature.properties.colour_on_map]["count"] === 0) { // Remove colour entry in legendData if its count becomes 0
