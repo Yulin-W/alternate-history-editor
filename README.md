@@ -10,6 +10,9 @@ You can also download some of the sample timelines and load them into the demo t
 - Alternate history timeline making OFC ^_^
 - Creating coloured maps in general with annotations, for say demographics and so on
 
+## Sample alternate history
+![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample-gifs/alternate_hist_sample.gif)
+
 ## Features
 - Easy map timeline editing: added new dates come with its independent map inherited from previous time point
 - Simple colouring in of map regions: 
@@ -26,10 +29,6 @@ You can also download some of the sample timelines and load them into the demo t
   - Lakes
 - Simple save/load of map timeline in json format (effectively text file)
 
-
-## Sample alternate history
-![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample-gifs/alternate_hist_sample.gif)
-
 ## Historic (Approximately) Scenarios
 Click links to download scenarios; note certain browsers may open the files directly, in which case usually right click save-as will have the file downloaded
 
@@ -44,10 +43,6 @@ Note: scenarios are not guranteed to be historically accurate nor do they repres
 
 [565-742AD: Death of Justinian I of Rome (Byzantine) to Beginning of the Tianbao Era - Peak of Tang](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/565-622-668-742AD.json)
 ![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/565-622-668-742AD.gif)
-
-## Sample: The Great Penguin War
-[Click to download timeline file (can be loaded into the editor)](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample%20Timelines/The%20Great%20Penguin%20War.json)
-![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample%20Timelines/Great%20Penguin%20War.gif)
 
 ## Extra Acknowledgements
 - "map_admin.js", "map_nation.js", "lakes.js", "rivers.js" were modified from:
