@@ -145,18 +145,45 @@ td {
     border-radius: 5px;
 }
 
+#colour-mode {
+    border-top: gray 2px solid;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: start;
+    height: 28%;
+    width: 100%;
+}
+
+.fill-mode {
+    border: lightgray outset 3px;
+    border-radius: 2px;
+    text-align: center;
+    display: block;
+    padding: 0;
+    margin: 4px 1px;
+    min-height: 15px;
+    max-height: 15px;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.fill-mode.active {
+    border: gray 3px inset;
+}
+
 #colour-choice {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: start;
-    height: 100%;
+    height: 70%;
     width: 100%;
     overflow-y: scroll;
 }
 
 .colour {
-    border: lightgray groove 3px;
+    border: lightgray outset 3px;
     border-radius: 2px;
     text-align: center;
     display: block;

@@ -156,7 +156,7 @@ td {
 }
 
 .fill-mode {
-    border: lightgray groove 3px;
+    border: lightgray outset 3px;
     border-radius: 2px;
     text-align: center;
     display: block;
@@ -169,7 +169,7 @@ td {
 }
 
 .fill-mode.active {
-    border: black 3px solid;
+    border: gray 3px inset;
 }
 
 #colour-choice {
@@ -183,7 +183,7 @@ td {
 }
 
 .colour {
-    border: lightgray groove 3px;
+    border: lightgray outset 3px;
     border-radius: 2px;
     text-align: center;
     display: block;
