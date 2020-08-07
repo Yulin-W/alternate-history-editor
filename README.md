@@ -1,6 +1,6 @@
 # Alternate History Timeline Map Editor
 
-Disclaimer: The maps in the editor are not intended to be exact nor do they represent personal views of the author. The maps are provided without any warranty of any kind whatsoever, either express or implied.
+Disclaimer: The maps in the editor are not intended to be exact nor do they represent personal views of the author. The maps and the editor are provided without any warranty of any kind whatsoever, either express or implied.
 
 [Click for demo](https://yulin-w.github.io/alternate-history-editor/main.html)
 
