@@ -35,6 +35,7 @@ Click links to download scenarios; note certain browsers may open the files dire
 Note: some of the below gifs were recorded with older versions of the app; thus map appearance may differ now (regions though stay the same)
 
 Note: scenarios are not guranteed to be historically accurate nor do they represent personal views of the author
+
 [1936AD: Coming of the Storm](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/1936AD.json)
 ![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/1936AD.gif)
 
