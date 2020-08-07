@@ -40,10 +40,6 @@ Note: scenarios are not guranteed to be historically accurate nor do they repres
 [565-742AD: Death of Justinian I of Rome (Byzantine) to Beginning of the Tianbao Era - Peak of Tang](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/565-622-668-742AD.json)
 ![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/565-622-668-742AD.gif)
 
-## Sample: The Great Penguin War
-[Click to download timeline file (can be loaded into the editor)](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample%20Timelines/The%20Great%20Penguin%20War.json)
-![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample%20Timelines/Great%20Penguin%20War.gif)
-
 ## Extra Acknowledgements
 - "map_admin.js", "map_nation.js", "lakes.js", "rivers.js" were modified from:
   - Data source: Made with Natural Earth. Free vector and raster map data @ naturalearthdata.com. 
