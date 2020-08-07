@@ -1,5 +1,7 @@
 # Alternate History Timeline Map Editor
 
+Disclaimer: The maps in the editor are not intended to be exact nor do they represent personal views of the author. The maps are provided without any warranty of any kind whatsoever, either express or implied.
+
 [Click for demo](https://yulin-w.github.io/alternate-history-editor/main.html)
 
 [Click for equirectangular projection demo (doesn't have lasso fill tool nor geographic underlay)](https://yulin-w.github.io/alternate-history-editor/rect-proj-ver/main.html)
@@ -11,6 +13,9 @@ You can also download some of the sample timelines and load them into the demo t
 - Creating coloured maps in general with annotations, for say demographics and so on
 
 ## Sample alternate history
+
+Disclaimer: This is a work of fiction. Names, characters, businesses, places, events, locales, and incidents are either the products of the author’s imagination or used in a fictitious manner. Any resemblance to actual persons, living or dead, or actual events is purely coincidental.
+
 ![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample-gifs/alternate_hist_sample.gif)
 
 ## Features
@@ -34,7 +39,7 @@ Click links to download scenarios; note certain browsers may open the files dire
 
 Note: some of the below gifs were recorded with older versions of the app; thus map appearance may differ now (regions though stay the same)
 
-Note: scenarios are not guranteed to be historically accurate nor do they represent personal views of the author
+Disclaimer: The below scenario maps were not intended to be historically exact nor do they represent personal views of the author. The maps are provided without any warranty of any kind whatsoever, either express or implied.
 
 [1936AD: Coming of the Storm](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/1936AD.json)
 ![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/1936AD.gif)
