@@ -35,11 +35,11 @@ Disclaimer: This is a work of fiction. Names, characters, businesses, places, ev
 - Simple save/load of map timeline in json format (effectively text file)
 
 ## Historic (Approximately) Scenarios
+Disclaimer: The scenario maps are not intended to be historically exact nor do they represent personal views of the author. The maps are provided without any warranty of any kind whatsoever, either express or implied.
+
 Click links to download scenarios; note certain browsers may open the files directly, in which case usually right click save-as will have the file downloaded
 
 Note: some of the below gifs were recorded with older versions of the app; thus map appearance may differ now (regions though stay the same)
-
-Disclaimer: The below scenario maps were not intended to be historically exact nor do they represent personal views of the author. The maps are provided without any warranty of any kind whatsoever, either express or implied.
 
 [1936AD: Coming of the Storm](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/1936AD.json)
 ![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Historic%20Scenarios/1936AD.gif)
