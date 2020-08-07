@@ -6,6 +6,27 @@
 
 You can also download some of the sample timelines and load them into the demo to play around
 
+## Possible uses
+- Alternate history timeline making OFC ^_^
+- Creating coloured maps in general with annotations, for say demographics and so on
+
+## Features
+- Easy map timeline editing: added new dates come with its independent map inherited from previous time point
+- Simple colouring in of map regions: 
+  - Single region colouring
+  - Lasso selection colouring of multiple regions
+- Choice of 2 base world maps:
+  - Countries
+  - First level administrative divisions of countries
+- Automatically generated legend with editable labels
+- Region info including country/provincial name (depending on base map) displayed upon mouse hover
+- Range of map overlays
+  - Geographic
+  - Rivers
+  - Lakes
+- Simple save/load of map timeline in json format (effectively text file)
+
+
 ## Sample alternate history
 ![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample-gifs/alternate_hist_sample.gif)
 
@@ -23,19 +44,6 @@ Note: scenarios are not guranteed to be historically accurate nor do they repres
 ## Sample: The Great Penguin War
 [Click to download timeline file (can be loaded into the editor)](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample%20Timelines/The%20Great%20Penguin%20War.json)
 ![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample%20Timelines/Great%20Penguin%20War.gif)
-
-## Usage
-
-### Notes
-- Loading up the tool may take some time, please be patient (or come and help refactor code to speed it up ^_^)
-- Using the admin level map will be rather laggy, so for most purposes rather use national level map
-- Double click legend label to edit (click elsewhere or press Enter to finish editing)
-- Added new time points inherit the map of the previous time point (makes timeline mapping easier)
-- To use offline, you'll need to setup a local server and then open the main.html there
-
-### Possible uses
-- Alternate history timeline making OFC ^_^
-- Creating coloured maps in general with annotations, for say demographics and so on
 
 ## Extra Acknowledgements
 - "map_admin.js", "map_nation.js", "lakes.js", "rivers.js" were modified from:
