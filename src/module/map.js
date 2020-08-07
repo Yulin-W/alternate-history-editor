@@ -1,11 +1,10 @@
 //TODO: reorganise the code in here, too clunky
 
 import { colours } from './colours.js';
-import {geojson_rivers} from '../assets/layers/rivers.js'
-import {geojson_lakes} from '../assets/layers/lakes.js'
-import { geojson_nation } from './map_nation.js';
-import { geojson_admin } from './map_admin.js';
 import { MapToolbar } from './map_toolbar.js';
+import { InfoInterface } from './info.js';
+import { LegendInterface } from './legend.js';
+import { MapLayersInterface } from './mapLayers.js';
 
 // Map editor interface
 
@@ -18,6 +17,7 @@ export class MapInterface {
     }
 
     setupMap() { // For initial starup map setup
+        /*
         this.map = L.map('map');
         this.map.setView([25, 10], 2);
         this.map.doubleClickZoom.disable(); // Disable double click zoom as it is used for legend editing
@@ -47,8 +47,18 @@ export class MapInterface {
         this.addFeatureListeners();
         this.initialiseLegend();
         this.initialiseInfo();
+        */
+        this.map = L.map('map');
+        this.map.setView([25, 10], 2);
+        this.map.doubleClickZoom.disable(); // Disable double click zoom as it is used for legend editing
+        this.mapLayersInterface = new MapLayersInterface(this);
+        this.mapLayersInterface.initialiseFeatureID();
+        this.mapLayersInterface.addFeatureListeners();
+        this.legendInterface = new LegendInterface(this);
+        this.infoInterface = new InfoInterface(this);
     }
 
+    /*
     bringOverlayForward(overlayID) {
         this.overlayers[overlayID].bringToFront();
     }
@@ -175,7 +185,7 @@ export class MapInterface {
         });
     }
 
-    addFeatureListeners() {
+    addFeatureListeners() { // Adds event listeners to interactionswith the basemap features
         Object.values(this.geojson._layers).forEach(layer => {
             layer.addEventListener("mouseover", (e) => {
                 this.highlightFeature(e)
@@ -189,39 +199,25 @@ export class MapInterface {
         });
     }
 
-    initialiseFeatureID() {
+    initialiseFeatureID() { // Initialises the FEATURE_ID for the layers as their reference (relies on the order preserving nature of geojson js varibles we have to ensure the same feature has the same ID everytime)
         let currentID = 0;
         Object.values(this.geojson._layers).forEach(layer => {
             layer.feature.properties.FEATURE_ID = currentID;
             currentID++;
         });
     }
+    */
 
     resetMap() { // For resetting map after app has started
-        //TODO: this and setupMap method are sharing too much in common, peryhaps make a new function
         let mapType = this.appInterface.dataStorage.mapType;
-        this.map.removeLayer(this.geojson);
-        this.layerControl.removeLayer(this.geojson);
-        if (mapType === "nation") {
-            this.geojson = L.geoJSON(geojson_nation, {
-                style: this.style,
-            }).addTo(this.map);
-        } else if (mapType === "admin") {
-            this.geojson = L.geoJSON(geojson_admin, {
-                style: this.style,
-            }).addTo(this.map);
-        }
-        this.geojson.bringToBack(); // This is to ensure that the overlay features are always visible above the map surface (note though the base image features seems to stay under, not sure why, but I'd like that anyway TODO: check why image stays under)
-        this.layerControl.addBaseLayer(this.geojson, "Base Map");
-        this.initialiseFeatureID();
-        this.addFeatureListeners();
-        this.resetLegend();
+        this.mapLayersInterface.resetMap(mapType);
+        this.legendInterface.resetLegend();
     }
 
     loadMap(mapData = null) {
         // Set properties of all features as white (effectively resetting the map but quicker than reloading) except for those whose FEATURE_ID are mentioned in the mapData
         if (mapData) {
-            Object.values(this.geojson._layers).forEach(layer => {
+            Object.values(this.mapLayersInterface.geojson._layers).forEach(layer => {
                 let layerID = layer.feature.properties.FEATURE_ID;
                 if (layerID in mapData) {
                     layer.setStyle({
@@ -235,7 +231,7 @@ export class MapInterface {
                 }
             });
         } else {
-            Object.values(this.geojson._layers).forEach(layer => {
+            Object.values(this.mapLayersInterface.geojson._layers).forEach(layer => {
                 layer.setStyle({
                     fillColor: colours["no-colour"]
                 });
@@ -243,6 +239,7 @@ export class MapInterface {
         }
     }
 
+    /*
     style(feature) {
         return {
             fillColor: 'white',
@@ -318,4 +315,5 @@ export class MapInterface {
             this.updateInfo(feature.properties, this.appInterface.dataStorage.entryDict[currentID]["legendData"]);
         }
     }
+    */
 }
