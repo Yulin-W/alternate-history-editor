@@ -1,4 +1,4 @@
-# alternate-history-editor
+# Alternate History Timeline Map Editor
 
 [Click for demo](https://yulin-w.github.io/alternate-history-editor/main.html)
 
