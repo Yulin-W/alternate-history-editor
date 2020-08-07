@@ -8,20 +8,14 @@ export class TimelineInterface {
         this.resetTimeline();
     }
 
-    loadTimeline() { // For loading from a txt file; practically, it reads the currently loaded timeline records in the dataStorage.entryDict
-        this.tbody.innerHTML = "";
-        this.entryCells = {}; // All rows
-        this.allCells = []; // All date and event cells
-        this.dateCells = {};
-        this.eventCells = {};
-        this.currentDate = null;
-        this.currentEvent = null;
-        this.currentCell = null;
-        this.currentID = null;
-        for (var key in this.appInterface.dataStorage.entryDict) { // TODO: perhaps dangerous as the order of dictionary I remember follows insertion order only for strings, which I do have now for keys, but it may become dodgy and if so timeline may get out of order upon loading
-            var value = this.appInterface.dataStorage.entryDict[key];
-            // TODO: here I copied part of addEntry in as the original add entry coupling with dataStorage meant duplicative entry adding in dataStorage
-            let currentID = key;
+    loadTimeline() { // For loading from a json file; practically, it reads the currently loaded timeline records in the dataStorage.entryDict
+        this.clearTimeLine();
+        let entryDictArray = Object.entries(this.appInterface.dataStorage.entryDict);
+        entryDictArray.sort((a, b) => (a[1].order > b[1].order) ? 1 : -1);
+        entryDictArray.forEach(entry => {
+            // TODO: here I copied part of addEntry in as the original add entry coupling with dataStorage meant duplicative entry adding in dataStorage, perhaps can reduce code use
+            let entryID = entry[0];
+            let value = entry[1];
             let newEntry = document.createElement("tr");
 
             const newDateCell = document.createElement("td");
@@ -39,12 +33,18 @@ export class TimelineInterface {
 
             this.tbody.insertBefore(newEntry, null);
 
-            this.updateCellList(newEntry, currentID);
-        }
+            this.updateCellList(newEntry, entryID);
+        });
         Object.values(this.dateCells)[0].click();
     }
 
     resetTimeline() { // Resets timeline to a 2 entry setup
+        this.clearTimeLine();
+        this.addEntry("Event date 1", "Event description 1");
+        Object.values(this.dateCells)[0].click();
+    }
+
+    clearTimeLine() {
         this.tbody.innerHTML = "";
         this.entryCells = {}; // All rows
         this.allCells = []; // All date and event cells
@@ -54,9 +54,6 @@ export class TimelineInterface {
         this.currentEvent = null;
         this.currentCell = null;
         this.currentID = null;
-        this.addEntry("Event date 1", "Event description 1");
-        this.addEntry("Event date 2", "Event description 2");
-        Object.values(this.dateCells)[0].click();
     }
 
     updateCellList(newEntry, currentID) { // For whenever new cells are added
@@ -71,7 +68,9 @@ export class TimelineInterface {
     }
 
     addEntry(date = "", event = "", previousEntry = null) { // Adds new entry directly below current entry where shift enter was called and returns reference to the new date cell in the new entry
-        let currentID = this.appInterface.dataStorage.entryCount; // TODO: such currentID variable is bad as easily mistaken for the this.currenID variable
+        let currentEntryCount = this.appInterface.dataStorage.entryCount; // This is the entry count before the addition of the new entry (as such it becomes the ID of the new entry in dataStorage)
+
+        // Prepare and make the new elements
         let newEntry = document.createElement("tr");
 
         const newDateCell = document.createElement("td");
@@ -89,21 +88,27 @@ export class TimelineInterface {
         newEntry.append(newDateCell);
         newEntry.append(newEventCell);
 
-        this.appInterface.dataStorage.addEntry(date, event, {}, {});
+        // Initialise order variable
+        let order = null;
 
         if (previousEntry !== null) { //  there was a specified previous entry //TODO: this part is pretty bad as its quite coupled
             this.tbody.insertBefore(newEntry, previousEntry.nextSibling);
             // For copying the previous entry's map into the new entry
             let previousID = Object.keys(this.entryCells).find(key => this.entryCells[key] === previousEntry) // TODO: again, such lookup is quite slow I'd reckon; note we didn't just take currentID - 1 as due to insertions and deletions the ids may well not be in order
-            this.appInterface.dataStorage.entryDict[currentID]["mapData"] = JSON.parse(JSON.stringify(this.appInterface.dataStorage.entryDict[previousID]["mapData"]));
-            this.appInterface.dataStorage.entryDict[currentID]["legendData"] = JSON.parse(JSON.stringify(this.appInterface.dataStorage.entryDict[previousID]["legendData"]));
-        } else { // insert at default location at the end
+            order = this.appInterface.dataStorage.entryDict[previousID]["order"]+1;
+            this.appInterface.dataStorage.shiftUpOrder(order); // Shifts order of all entries in the entryDict >= orderStart up by 1, this line needs to be before the addEntry, else the added Entry will also get shifted
+            this.appInterface.dataStorage.addEntry(date, event, order, {}, {});
+            this.appInterface.dataStorage.entryDict[currentEntryCount]["mapData"] = JSON.parse(JSON.stringify(this.appInterface.dataStorage.entryDict[previousID]["mapData"]));
+            this.appInterface.dataStorage.entryDict[currentEntryCount]["legendData"] = JSON.parse(JSON.stringify(this.appInterface.dataStorage.entryDict[previousID]["legendData"]));
+        } else { // insert at default location at the end and has no content (no previousEntry so no inheriting of previous Entry's map)
             this.tbody.insertBefore(newEntry, null);
+            order = Object.keys(this.appInterface.dataStorage.entryDict).length; // number of entries in Entry dict is equal to the order of an appended final element (as order starts from 0)
+            this.appInterface.dataStorage.addEntry(date, event, order, {}, {});
         }
 
-        this.updateCellList(newEntry, currentID);
+        this.updateCellList(newEntry, currentEntryCount);
 
-        return newDateCell
+        return newDateCell;
     }
 
     addCellChangeListener(cell) { // Adds click event listener
@@ -119,30 +124,43 @@ export class TimelineInterface {
                 if (e.shiftKey) {
                     if (e.key == "Enter") { // Add a new cell after current ceell
                         e.preventDefault(); // Stops the default change line behaviour in the editable element
-                        const currentEntry = this.tbody.querySelector("tr:focus-within");
-                        if (currentEntry) {
-                            const newDateCell = this.addEntry("", "", currentEntry);
-                            newDateCell.click();
-                        } else {
-                            const newDateCell = this.addEntry("", "", null);
-                        }
-                    } else if (e.key == "Backspace") { // Delete current cell //TODO: logic in this part is getting too coupled with other functions and so on
-                        e.preventDefault();
-                        const currentEntry = this.tbody.querySelector("tr:focus-within");
-                        if (currentEntry) {
-                            this.currentCell = null;
-                            delete this.appInterface.dataStorage.entryDict[this.currentID];
-                            if (currentEntry.previousSibling) {
-                                currentEntry.previousSibling.childNodes[0].click();
-                            } else if (currentEntry.nextSibling) {
-                                currentEntry.nextSibling.childNodes[0].click()
-                            }
-                            currentEntry.remove();
-                        }
+                        this.appendCellAfter();
+                    } else if (e.key == "Backspace") { // Delete current cel
+                        e.preventDefault(); 
+                        this.deleteCurrentCell();
                     }
                 }
             }
         });
+    }
+
+    appendCellAfter() {
+        const currentEntry = this.tbody.querySelector("tr:focus-within");
+        if (currentEntry) {
+            const newDateCell = this.addEntry("", "", currentEntry);
+            newDateCell.click();
+        } else {
+            const newDateCell = this.addEntry("", "", null);
+        }
+    }
+
+    deleteCurrentCell() {
+        const currentEntry = this.tbody.querySelector("tr:focus-within");
+        if (currentEntry) {
+            this.currentCell = null;
+            // Performs order shift down for all entries after the deleted entry
+            let order = this.appInterface.dataStorage.entryDict[this.currentID]["order"];
+            this.appInterface.dataStorage.shiftDownOrder(order);
+            // Deletes entry data for the entry in dataStorage
+            delete this.appInterface.dataStorage.entryDict[this.currentID];
+            // Clicks to previous sibling if exists or goes to next sibling if doesn't exist
+            if (currentEntry.previousSibling) {
+                currentEntry.previousSibling.childNodes[0].click();
+            } else if (currentEntry.nextSibling) {
+                currentEntry.nextSibling.childNodes[0].click()
+            }
+            currentEntry.remove(); // Removes entry from the timeline
+        }
     }
 
     clickCell(cell) { // Actions to take when a cell is pressed
@@ -158,6 +176,7 @@ export class TimelineInterface {
         this.currentID = Object.keys(this.dateCells).find(key => this.dateCells[key] === this.currentDate); // TODO: this search may well become rather inefficient, perhaps aim for a 2 way dict?
         this.appInterface.mapInterface.loadMap(this.appInterface.dataStorage.entryDict[this.currentID]["mapData"]);
         this.appInterface.mapInterface.legendInterface.updateLegend(this.currentID);
+        console.log(this.appInterface.dataStorage.entryDict[this.currentID]["order"]);
     }
 
     updateCorrespondingStorage(entryID) { // Updates corresponding Data Storage entry info for date and event for the entryID specified
