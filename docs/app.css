@@ -102,11 +102,11 @@ td {
 #toolbar {
     width: 100%;
     border-bottom: solid gray 2px;
-    height: 10vh;
+    height: 15vh;
 }
 
 #map {
-    height: 90%;
+    height: 80%;
     z-index: 0;
     /* So that it doesn't compete over the help popup*/
 }
@@ -151,7 +151,7 @@ td {
     flex-wrap: wrap;
     align-items: center;
     justify-content: start;
-    height: 28%;
+    height: 18%;
     width: 100%;
 }
 
@@ -161,7 +161,7 @@ td {
     text-align: center;
     display: block;
     padding: 0;
-    margin: 4px 1px;
+    margin: 2px 1px;
     min-height: 15px;
     max-height: 15px;
     min-width: 100px;
@@ -177,7 +177,7 @@ td {
     flex-wrap: wrap;
     align-items: center;
     justify-content: start;
-    height: 70%;
+    height: 80%;
     width: 100%;
     overflow-y: scroll;
 }
