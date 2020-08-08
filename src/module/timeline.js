@@ -176,7 +176,6 @@ export class TimelineInterface {
         this.currentID = Object.keys(this.dateCells).find(key => this.dateCells[key] === this.currentDate); // TODO: this search may well become rather inefficient, perhaps aim for a 2 way dict?
         this.appInterface.mapInterface.loadMap(this.appInterface.dataStorage.entryDict[this.currentID]["mapData"]);
         this.appInterface.mapInterface.legendInterface.updateLegend(this.currentID);
-        console.log(this.appInterface.dataStorage.entryDict[this.currentID]["order"]);
     }
 
     updateCorrespondingStorage(entryID) { // Updates corresponding Data Storage entry info for date and event for the entryID specified
