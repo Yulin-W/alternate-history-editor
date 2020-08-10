@@ -27,6 +27,7 @@ Disclaimer: This is a work of fiction. Names, characters, businesses, places, ev
   - Countries
   - First level administrative divisions of countries
 - Automatically generated legend with editable labels
+- Upload any geojson basemap of your choice for editing
 - Region info including country/provincial name (depending on base map) displayed upon mouse hover
 - Range of map overlays
   - Geographic
