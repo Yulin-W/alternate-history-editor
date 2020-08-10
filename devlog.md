@@ -9,7 +9,7 @@
 - [x] Save and load files
 
 ### Possible future additional changes (unlikely though in the near future)
-- Allow easier geojson base map addition and new save file format for customn geojsoning (keep in mind eu4 parser)
+- Allow easier geojson base map addition and new save file format for customn geojsoning
 - wrap the timeline, timeline playback, colouring as a plugin, the colouring itself alongisde legend as a plugin and include as leaflet thing (ofc this really depends on time as it's a tangejnt task)
 - Split the functioning components of leaflet interatimng things into plugin like files (and perhaps share them indivdiually as plugins, e.g. the geojson colouring toolbar)
 - Timeline mode via leaflet-timeline (will need to add to geojson layers some kind of timetrack thing, but should be fine as doesn't affect background save fil;e format)
@@ -26,14 +26,12 @@
 - Change colours from legend/select regions of same colour; perhaps use leaflet search?
 - Allow entry adding that doesn't inherit previous as well for non timeline maps
 - More parameter customisation, e.g. (parts could come from the geojson data used) (much of some implementable features should already be in geojson data anyway)
-  - Flag
-  - Population
-  - GDP
 - GIF generation of timeline (so like those border youtube videos)
 - Onmap label functionality
 - Loading previously made timelines
 - Show large regional labels on map
-- Statistics page for evaluations of land size and population to well, make one feel good lol like in civ4
+- Styling polygons with images and patterns other than pure colours (should be a pluging somewhere)
+- Statistics page for evaluations of say number of regions uncder a colour, etc.
 - Leaflet measure for area measuring and length measurememnt and coordinate finding
 - Get a better interface theme
 - Refactor code to reduce coupling, and finish up those optional todos
