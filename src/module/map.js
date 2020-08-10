@@ -27,13 +27,18 @@ export class MapInterface {
         this.infoInterface = new InfoInterface(this);
     }
 
-    resetMap() { // For resetting map after app has started
+    resetMap() { // For resetting map after app has started TODO: make ti work by passing through maptype not by taking maptype from dataStorgae to reduce coupling
         let mapType = this.appInterface.dataStorage.mapType;
         this.mapLayersInterface.resetMap(mapType);
         this.legendInterface.resetLegend();
     }
 
-    loadMap(mapData = null) {
+    loadCustomMap(mapGeojson) { // TODO: merge with reset Map
+        this.mapLayersInterface.loadCustomMap(mapGeojson);
+        this.legendInterface.resetLegend();
+    }
+
+    loadMap(mapData = null) { // TODO: bad naming this i called load map when its in reality not loadmap but more so clear map
         // Set properties of all features as white (effectively resetting the map but quicker than reloading) except for those whose FEATURE_ID are mentioned in the mapData
         if (mapData) {
             Object.values(this.mapLayersInterface.geojson._layers).forEach(layer => {

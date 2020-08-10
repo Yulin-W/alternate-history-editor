@@ -24,9 +24,36 @@ List of structures of save version
     "entryCount" : the currennt entry ID got up to, equal to total number of entries including deleted ones
 }
 
-1.1: Current version
+1.1: Past version
 {
     "version" : "1.1" (save version string),
+    "entryDict" : {
+        entryID of timeline entry : {
+            "date" : date entry string,
+            "event" : event entry string,
+            "order" : integer representing placing in the timeline,
+            "mapData" : {
+                featureID str of coloured feature : colourID str of feature
+                ...
+            }
+            "legendData" : {
+                colourID of legend entry : {
+                    "count" : integer count of number of features of the colour,
+                    "entry" : legend label str of the colour
+                }
+            }
+        }
+        ...
+    }
+    "mapType" : string for type of base map,
+    "entryCount" : the currennt entry ID got up to, equal to total number of entries including deleted ones
+}
+
+1.2: Current version
+{
+    "version" : "1.2" (save version string),
+    "customMap" : true or false depending on whether the save is based off a non-inbuild map,
+    "customMapGeojson" : geojson object for the customMap,
     "entryDict" : {
         entryID of timeline entry : {
             "date" : date entry string,

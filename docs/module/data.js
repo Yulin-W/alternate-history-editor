@@ -2,6 +2,8 @@ export class DataStorage { // Storage class for holding EntryStorage instances i
     constructor() {
         this.entryDict = {}; // dictionary holding dictionaries indexed by the id of the timeline entry
         this.mapType = "nation";
+        this.customMap = false;
+        this.customMapGeojson = null;
         this.entryCount = 0;
     }
 

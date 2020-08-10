@@ -15,7 +15,14 @@ export class InfoInterface {
 
     updateInfo(properties, legendData) {
         if (properties) { // Check if properties is defined
-            this.info._div.innerHTML = "Name: " + properties["name"] + "<br>";
+            this.info._div.innerHTML = "";
+            if ("name" in properties) {
+                this.info._div.innerHTML = "Name: " + properties["name"] + "<br>";
+            } else if ("NAME" in properties) {
+                this.info._div.innerHTML = "Name: " + properties["NAME"] + "<br>";
+            } else if ("Name" in properties) {
+                this.info._div.innerHTML = "Name: " + properties["Name"] + "<br>";
+            }
             if (properties.colour_on_map in legendData) {
                 this.info._div.innerHTML += legendData[properties.colour_on_map]["entry"];
             }

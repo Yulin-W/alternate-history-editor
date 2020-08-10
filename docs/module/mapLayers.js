@@ -7,7 +7,6 @@ import { geojson_admin } from './map_admin.js';
 export class MapLayersInterface {
     constructor(mapInterface) {
         this.mapInterface = mapInterface;
-
         // TODO: consider adding a optiions page to allow options such as adding underneath a OpenStreat map or terrain map or whatever
         // Initialise basemap
         this.geojson = L.geoJSON(geojson_nation, {
@@ -164,7 +163,7 @@ export class MapLayersInterface {
         }    
     }
 
-    resetMap(mapType) {
+    resetMap(mapType) { // for resetting map
         this.mapInterface.map.removeLayer(this.geojson);
         this.layerControl.removeLayer(this.geojson);
         if (mapType === "nation") {
@@ -175,7 +174,24 @@ export class MapLayersInterface {
             this.geojson = L.geoJSON(geojson_admin, {
                 style: this.style,
             }).addTo(this.mapInterface.map);
+        } else { // Custom map
+            this.geojson = L.geoJSON(this.mapInterface.appInterface.dataStorage.customMapGeojson, {
+                style: this.style,
+            }).addTo(this.mapInterface.map);
         }
+        this.geojson.bringToBack(); // This is to ensure that the overlay features are always visible above the map surface (note though the base image features seems to stay under, not sure why, but I'd like that anyway TODO: check why image stays under)
+        this.layerControl.addBaseLayer(this.geojson, "Base Map");
+        this.initialiseFeatureID();
+        this.addFeatureListeners();
+    }
+
+    loadCustomMap(mapGeojson) { // Merge with reset map for function reuse
+        this.mapInterface.appInterface.dataStorage.customMapGeojson = JSON.parse(JSON.stringify(mapGeojson)); // an copied pure unedited version of the mapGeojson, used for when exporting the original geojson or for using in save files including the geojson
+        this.mapInterface.map.removeLayer(this.geojson);
+        this.layerControl.removeLayer(this.geojson);
+        this.geojson = L.geoJSON(mapGeojson, {
+            style: this.style,
+        }).addTo(this.mapInterface.map);
         this.geojson.bringToBack(); // This is to ensure that the overlay features are always visible above the map surface (note though the base image features seems to stay under, not sure why, but I'd like that anyway TODO: check why image stays under)
         this.layerControl.addBaseLayer(this.geojson, "Base Map");
         this.initialiseFeatureID();
