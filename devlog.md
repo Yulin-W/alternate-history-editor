@@ -10,7 +10,7 @@
 
 ### Possible future additional changes (unlikely though in the near future)
 - Allow easier geojson base map addition and new save file format for customn geojsoning (keep in mind eu4 parser)
-- wrap the timeline, timeline playback, colouring as a plugin, the colouring itself alongisde legend as a plugin and include as leaflet thing
+- wrap the timeline, timeline playback, colouring as a plugin, the colouring itself alongisde legend as a plugin and include as leaflet thing (ofc this really depends on time as it's a tangejnt task)
 - Split the functioning components of leaflet interatimng things into plugin like files (and perhaps share them indivdiually as plugins, e.g. the geojson colouring toolbar)
 - Timeline mode via leaflet-timeline (will need to add to geojson layers some kind of timetrack thing, but should be fine as doesn't affect background save fil;e format)
 - Projection changing dynamically? so save all settings as a temporary variable, and reset entire map; I'd say use proj4leaflet
