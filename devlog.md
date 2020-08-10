@@ -3,7 +3,7 @@
 ### General
 - Leaflet 1.6.0 was used
 
-### Planned functionalities
+### Planned core functionalities
 - [x] Timeline editor (each time point specified will have corresponding map; by default map of new time point inherits those of preceding time point)
 - [x] Map colourer (via working with Leaflet, geoJSON)
 - [x] Save and load files
