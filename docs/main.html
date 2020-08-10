@@ -16,19 +16,28 @@
         <ul>
             <li class="button" id="new-admin">New Admin Map Timeline</li>
             <li class="button" id="new-nation">New Nation Map Timeline</li>
+            <li class="button" id="custom-map">
+                New Map From File
+            </li>
+            <input type="file" id="file-choice-map" style="display:none">
             <li class="button" id="save">Save</li>
             <li class="button" id="load">
                 Load
-                <input type="file" class="file-choice" style="display:none">
             </li>
+            <input type="file" id="file-choice" style="display:none">
             <li class="button" id="help">Help</li>
             <div id="help-modal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <h1>General</h1>
-                    <p>Use single fill for filling single province, use lasso fill to fill or delete multiple provinces</p>
-                    <p>Use top left layer button to change between options</p>
+                    <p>Use top left layer button to change between map layer options</p>
+                    <p>Edit legend labels: double click label text</p>
+                    <h1>Save and Load</h1>
+                    <p>New admin map timeline wipes clean current map and replace basemap with admin-1 level world map</p>
+                    <p>New nation map timeline wipes clean current map and replace basemap with nation level world map</p>
+                    <p>New map from file wipes clean current map and prompts user to upload a custom geojson basemap; the save of such map will include the custom geojson as well, hence the save will be much larger than the admin/nation map</p>
                     <h1>Colouring</h1>
+                    <p>Use single fill for filling single province, use lasso fill to fill or delete multiple provinces</p>
                     <p>Currently chosen colour will have a solid black border and be protruding</p>
                     <p>Colour of currently hovered over region will have a dashed black border and be protruding</p>
                     <p>Colours in the toolbar will have a double border if they are on the map already</p>
@@ -37,8 +46,6 @@
                     <h1>Timeline</h1>
                     <p>Add date/event entry: Shift + Enter</p>
                     <p>Delete date/event entry: Shift + Backspace</p>
-                    <h1>Map features</h1>
-                    <p>Edit legend labels: double click label text</p>
                 </div>
             </div>
             <li class="button" id="options">Options</li>
