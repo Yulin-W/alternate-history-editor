@@ -3,21 +3,30 @@
 
 export class Loader { // Class which loads saves into the app, converting them regardless of version to the current version
     constructor() {
-        this.currentSaveVersion = "1.1";
+        this.currentSaveVersion = "1.2";
     }
 
     processSave(save) { // takes json parsed object file from menubar and converts it to the newest version
         let version = this.detectSaveVersion(save);
 
         if (version === "1.0") {
-            return this.one_zero_to_one_one(save);
+            return this.processSave(this.one_zero_to_one_one(save));
+        } else if (version == "1.1") {
+            return this.one_one_to_one_two(save);
         } else if (version == this.currentSaveVersion) { // no modification needed
             return save;
         }
     }
 
-    one_zero_to_one_one(save) { // converts 1.0 ver save to 1.1 ver save TODO: slight concerns as maybe pass by reference not value
+    one_one_to_one_two(save) { // converts 1.1 ver save to 1.2 ver save TODO: slight concerns as maybe pass by reference not value;
         save.version = this.currentSaveVersion;
+        save.customMap = false; // 1.1 version saves didn't have non-inbuilt custom maps
+        save.customMapGeojson = false; // same reason as above
+        return save;
+    }
+
+    one_zero_to_one_one(save) { // converts 1.0 ver save to 1.1 ver save TODO: slight concerns as maybe pass by reference not value
+        save.version = "1.1";
         let order = 0;
         Object.values(save.entryDict).forEach(entry => {
             // Assigns order based on current order of entryDict (which is insertion order I think if I remembered correction for such string keys)

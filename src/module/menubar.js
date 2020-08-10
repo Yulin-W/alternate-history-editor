@@ -1,5 +1,7 @@
 import { Loader } from "./loader.js";
 
+//TODO: this should be refined much better and faster
+
 export class Menubar {
     constructor(appInterface) {
         this.appInterface = appInterface; // TODO: I feel that doing this is not a good idea, but can't think of easier way for classes in composition to communciate witht he main class
@@ -30,16 +32,42 @@ export class Menubar {
             this.appInterface.timelineInterface.updateCorrespondingStorage(this.appInterface.timelineInterface.currentID);
             let saveData = {
                 version: this.loader.currentSaveVersion,
+                customMap : !["nation", "admin"].includes(this.appInterface.dataStorage.mapType),
+                customMapGeojson : null,
                 entryDict: this.appInterface.dataStorage.entryDict,
                 mapType: this.appInterface.dataStorage.mapType,
                 entryCount: this.appInterface.dataStorage.entryCount
             };
+            if (saveData.customMap) { // Assign geojson data if is a custom map
+                saveData.customMapGeojson = this.appInterface.dataStorage.customMapGeojson;
+            }
             this.saveFile("timeline.json", JSON.stringify(saveData));
+        });
+
+        // New map file choice button
+        this.mapFromFile = document.querySelector("#custom-map");
+        this.fileChoiceMap = document.querySelector("#file-choice-map"); //TODO: ideally make this same class as below fle choice and resue the read filel functionality
+        this.fileChoiceMap.addEventListener("change", () => { // Setup file load TODO: move dis to a function I'd say, alongside load button for some reuse ability
+            if (this.fileChoiceMap.value !== "") { // avoid triggering the file load process when the fileChoice value is reset to "" at the end of file load processes
+                let fr = new FileReader();
+                fr.onload = () => {
+                    let geojson_new = JSON.parse(JSON.stringify(JSON.parse(fr.result))); // for some reason direct parsing cooks with data mutation and so on, so did this
+                    this.appInterface.dataStorage.resetEntryDict();
+                    this.appInterface.dataStorage.mapType = this.fileChoiceMap.files[0].name;
+                    this.appInterface.mapInterface.loadCustomMap(geojson_new);
+                    this.appInterface.timelineInterface.resetTimeline();
+                    this.fileChoiceMap.value = ""; // reset fileChoice input value so that in the case where the new chosen file was the previous, the load function would still trigger as "change" event would still be fired
+                }
+                fr.readAsText(this.fileChoiceMap.files[0]);
+            }
+        });
+        this.mapFromFile.addEventListener("click", () => {
+            this.fileChoiceMap.click();
         });
 
         // Load button
         this.load = document.querySelector("#load");
-        this.fileChoice = this.load.querySelector(".file-choice");
+        this.fileChoice = document.querySelector("#file-choice");
         this.fileChoice.addEventListener("change", () => { // Setup file load TODO: move dis to a function I'd say
             if (this.fileChoice.value !== "") { // avoid triggering the file load process when the fileChoice value is reset to "" at the end of file load processes
                 let fr = new FileReader();
@@ -50,6 +78,8 @@ export class Menubar {
                     this.appInterface.dataStorage.entryDict = result.entryDict;
                     this.appInterface.dataStorage.entryCount = result.entryCount;
                     this.appInterface.dataStorage.mapType = result.mapType;
+                    this.appInterface.dataStorage.customMap = result.customMap;
+                    this.appInterface.dataStorage.customMapGeojson = result.customMapGeojson;
                     this.appInterface.mapInterface.resetMap();
                     this.appInterface.timelineInterface.loadTimeline();
                     this.fileChoice.value = ""; // reset fileChoice input value so that in the case where the new chosen file was the previous, the load function would still trigger as "change" event would still be fired
@@ -58,7 +88,7 @@ export class Menubar {
             }
         });
         this.load.addEventListener("click", () => {
-            this.loadFile();
+            this.fileChoice.click();
         });
 
         // Help button
@@ -123,9 +153,5 @@ export class Menubar {
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
-    }
-
-    loadFile() {
-        this.fileChoice.click();
     }
 }
