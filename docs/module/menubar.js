@@ -7,11 +7,13 @@ export class Menubar {
         this.appInterface = appInterface; // TODO: I feel that doing this is not a good idea, but can't think of easier way for classes in composition to communciate witht he main class
         this.loader = new Loader();
 
-        // New admin map button
+        // New admin map button TODO: refactor together into a single function the common parts of the load, new admin, new nation, new map choice 
         this.newAdmin = document.querySelector("#new-admin");
         this.newAdmin.addEventListener("click", () => {
             this.appInterface.dataStorage.resetEntryDict();
             this.appInterface.dataStorage.mapType = "admin";
+            this.appInterface.dataStorage.customMap = false;
+            this.appInterface.dataStorage.customMapGeojson = null;
             this.appInterface.mapInterface.resetMap();
             this.appInterface.timelineInterface.resetTimeline();
         });
@@ -21,6 +23,8 @@ export class Menubar {
         this.newNation.addEventListener("click", () => {
             this.appInterface.dataStorage.resetEntryDict();
             this.appInterface.dataStorage.mapType = "nation";
+            this.appInterface.dataStorage.customMap = false;
+            this.appInterface.dataStorage.customMapGeojson = null;
             this.appInterface.mapInterface.resetMap();
             this.appInterface.timelineInterface.resetTimeline();
         });
@@ -52,8 +56,12 @@ export class Menubar {
                 let fr = new FileReader();
                 fr.onload = () => {
                     let geojson_new = JSON.parse(JSON.stringify(JSON.parse(fr.result))); // for some reason direct parsing cooks with data mutation and so on, so did this
+                    // Update data storage
                     this.appInterface.dataStorage.resetEntryDict();
                     this.appInterface.dataStorage.mapType = this.fileChoiceMap.files[0].name;
+                    this.appInterface.dataStorage.customMap = true;
+                    this.appInterface.dataStorage.customMapGeojson = geojson_new;
+                    // Load in map
                     this.appInterface.mapInterface.loadCustomMap(geojson_new);
                     this.appInterface.timelineInterface.resetTimeline();
                     this.fileChoiceMap.value = ""; // reset fileChoice input value so that in the case where the new chosen file was the previous, the load function would still trigger as "change" event would still be fired

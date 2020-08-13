@@ -16,18 +16,39 @@ export class MapInterface {
         this.mapToolbar = new MapToolbar(this);
     }
 
-    setupMap() { // For initial starup map setup
-        this.map = L.map('map');
+    projectionChange(newProjection, projectionKey) {
+        // Takes in a leaflet crs object and projection key in map_toolbar.projectionModeInfo as argument
+        // Idea is to delete current map object, reinitiate it, and then load in from the unchanged datastorage mapdata the map
+        this.map.remove();
+        this.map = null;
+        this.setupMap(newProjection, projectionKey);
+        this.appInterface.timelineInterface.currentCell.click()// Cell click refreshes map
+        this.mapToolbar.initialiseLassoSelect(); // needs to be reinitialised as lasso select requires a event listener on the map
+    }
+
+    setupMap(newProjection=null, projectionKey=null) { // For initial starup map setup
+        // Takes in optional argumetn indicating the new projection to be used, if none defaults to EPSG3857
+        this.currentProjection = newProjection ? newProjection : L.CRS.EPSG3857; // Mercator, default
+        this.currentProjectionKey = projectionKey ? projectionKey : "mercator"; // Mercator, default
+        this.map = L.map('map', {crs : this.currentProjection});
         this.map.setView([25, 10], 2);
         this.map.doubleClickZoom.disable(); // Disable double click zoom as it is used for legend editing
-        this.mapLayersInterface = new MapLayersInterface(this);
+        let currentGeojsonKey = "nation"; // default
+        if (this.mapLayersInterface) { // in the case where there was already a mapLayers Interface, i.e. the setupMap call is not for initialising at app start but for projection change/map refresh
+            if (this.appInterface.dataStorage.customMap) {
+                currentGeojsonKey = "custom";
+            } else {
+                currentGeojsonKey = this.appInterface.dataStorage.mapType; // for case of the two built in maps nation or admin
+            }
+        }
+        this.mapLayersInterface = new MapLayersInterface(this, this.currentProjectionKey, currentGeojsonKey);
         this.mapLayersInterface.initialiseFeatureID();
         this.mapLayersInterface.addFeatureListeners();
         this.legendInterface = new LegendInterface(this);
         this.infoInterface = new InfoInterface(this);
     }
 
-    resetMap() { // For resetting map after app has started TODO: make ti work by passing through maptype not by taking maptype from dataStorgae to reduce coupling
+    resetMap() { // For resetting map after app has started without remaking a map object TODO: make ti work by passing through maptype not by taking maptype from dataStorgae to reduce coupling
         let mapType = this.appInterface.dataStorage.mapType;
         this.mapLayersInterface.resetMap(mapType);
         this.legendInterface.resetLegend();
@@ -38,7 +59,7 @@ export class MapInterface {
         this.legendInterface.resetLegend();
     }
 
-    loadMap(mapData = null) { // TODO: bad naming this i called load map when its in reality not loadmap but more so clear map
+    loadMap(mapData = null) {
         // Set properties of all features as white (effectively resetting the map but quicker than reloading) except for those whose FEATURE_ID are mentioned in the mapData
         if (mapData) {
             Object.values(this.mapLayersInterface.geojson._layers).forEach(layer => {

@@ -99,16 +99,10 @@ td {
     width: 70%;
 }
 
-#toolbar {
-    width: 100%;
-    border-bottom: solid gray 2px;
-    height: 15vh;
-}
-
 #map {
-    height: 80%;
+    height: 82%;
     z-index: 0;
-    /* So that it doesn't compete over the help popup*/
+    /* z-index set So that it doesn't compete over the help popup*/
 }
 
 .legend {
@@ -145,7 +139,13 @@ td {
     border-radius: 5px;
 }
 
-#colour-mode {
+#toolbar {
+    width: 100%;
+    border-bottom: solid gray 2px;
+    height: 15vh;
+}
+
+#colour-mode, #projection-mode {
     border-top: gray 2px solid;
     display: flex;
     flex-wrap: wrap;
@@ -155,7 +155,7 @@ td {
     width: 100%;
 }
 
-.fill-mode {
+.fill-mode, .projection-mode-button {
     border: lightgray outset 3px;
     border-radius: 2px;
     text-align: center;
@@ -168,7 +168,7 @@ td {
     max-width: 100px;
 }
 
-.fill-mode.active {
+.fill-mode.active, .projection-mode-button.active {
     border: gray 3px inset;
 }
 
@@ -177,7 +177,7 @@ td {
     flex-wrap: wrap;
     align-items: center;
     justify-content: start;
-    height: 80%;
+    height: 63%;
     width: 100%;
     overflow-y: scroll;
 }
@@ -188,7 +188,7 @@ td {
     text-align: center;
     display: block;
     padding: 0;
-    margin: 4px 1px;
+    margin: 5px 1px 1px 1px;
     min-height: 15px;
     max-height: 15px;
     min-width: 15px;
@@ -201,16 +201,16 @@ td {
 
 .colour.hovered-on {
     /*This defined after above as the class property hovered-on (as in corresponding colour region hovered on in map) should take priority over on-map for border*/
-    margin-top: 0px;
-    margin-bottom: 8px;
+    margin-top: 1px;
+    margin-bottom: 4px;
     border: black 3px dashed;
 }
 
 .colour.active {
     /*This defined after above as the class property active should take priority over above2*/
     border: black 3px solid;
-    margin-top: 0px;
-    margin-bottom: 8px;
+    margin-top: 1px;
+    margin-bottom: 4px;
 }
 
 #no-colour:after {
