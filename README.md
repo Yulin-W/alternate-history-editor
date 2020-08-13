@@ -4,6 +4,8 @@
 
 Note: equirectangular projection functionality has been incorporated into the main demo; consequently the original demo for it has been removed
 
+Note: the startup and projection changing might be slow
+
 You can also download some of the sample timelines and load them into the demo to play around
 
 ## Possible uses
