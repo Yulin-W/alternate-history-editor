@@ -2,7 +2,7 @@
 
 [Click for demo](https://yulin-w.github.io/alternate-history-editor/main.html)
 
-[Click for equirectangular projection demo (doesn't have lasso fill tool nor geographic underlay)](https://yulin-w.github.io/alternate-history-editor/rect-proj-ver/main.html)
+Note: equirectangular projection functionality has been incorporated into the main demo; consequently the original demo for it has been removed
 
 You can also download some of the sample timelines and load them into the demo to play around
 
