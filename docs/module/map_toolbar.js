@@ -7,9 +7,10 @@ export class MapToolbar {
         this.mapInterface = mapInterface
         this.initialiseColourChoice();
         this.initialiseColourMode();
+        this.initialiseProjectionMode();
     }
 
-    initialiseColourChoice(mapInterface) {
+    initialiseColourChoice() {
         this.colourChoice = document.querySelector("#colour-choice");
         this.colourOptionDict = {};
         Object.keys(colours).forEach(colourID => {
@@ -77,5 +78,42 @@ export class MapToolbar {
         Object.values(this.colourOptionDict).forEach(colour => {
             colour.classList.remove("on-map");
         });
+    }
+
+    initialiseProjectionMode() {
+        // Note loading new files and so on etc as they do not recreate the map object change the projection
+        this.projectionModeToolbar = document.querySelector("#projection-mode");
+        this.projectionModeInfo = { // Note: when you add projections, apart from here, you'll need also to go to maplayers to check the layer setups for raster images may be incompatible with the projection
+            "mercator" : { // This is the default leaflet one
+                text:"Mercator",
+                crs:L.CRS.EPSG3857,
+                dictKey:"mercator"
+            },
+            "equirectangular" : {
+                text:"Equirectangular",
+                crs:L.CRS.EPSG4326,
+                dictKey:"equirectangular"
+            }
+        }
+        this.projectionModeDict = {};
+        for (let [modeID, modeInfo] of Object.entries(this.projectionModeInfo)) {
+            const modeElement = document.createElement("li");
+            modeElement.classList.add("projection-mode-button");
+            modeElement.id = modeID;
+            modeElement.setAttribute("dictKey",modeInfo.dictKey);
+            modeElement.innerText = modeInfo.text;
+            this.projectionModeToolbar.appendChild(modeElement);
+            modeElement.addEventListener("click", () => {
+                if (this.currentProjectionMode) // If there is already a selected colour, remove its active status
+                    this.currentProjectionMode.classList.remove("active");
+                modeElement.classList.add("active");
+                this.currentProjectionMode = modeElement;
+                this.mapInterface.projectionChange(this.projectionModeInfo[modeElement.getAttribute("dictKey")].crs, modeElement.getAttribute("dictKey"));
+            });
+            this.projectionModeDict[modeID] = modeElement; // note current mode points to mode element
+        }
+        // Initialise the default projection mode button active status (doesn't deal with the actual map projection though as that is done by default in the map.js and maplayers.js)
+        this.currentProjectionMode = this.projectionModeDict["mercator"];
+        this.projectionModeDict["mercator"].classList.add("active");
     }
 }

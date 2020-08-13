@@ -47,6 +47,17 @@ export class LegendInterface {
         });;
     }
 
+    /* FIXME:
+    initialiseLegendHover(entry) { // initialises for legend element hovered functionality
+        entry.addEventListener("mouseover")
+        entry.addEventListener("mouseout")
+    }
+    FIXME:
+    onHoverLegend() { // function for legend element hover behaviour
+
+    }
+    */
+
     selectColourByLegend(colourID) { // Selects clicked colour in legend as current colour
         this.mapInterface.mapToolbar.colourOptionDict[colourID].click();
     }

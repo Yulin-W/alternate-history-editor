@@ -5,16 +5,24 @@ import { geojson_nation } from './map_nation.js';
 import { geojson_admin } from './map_admin.js';
 
 export class MapLayersInterface {
-    constructor(mapInterface) {
+    constructor(mapInterface, projectionKey, geojsonKey) {
         this.mapInterface = mapInterface;
         // TODO: consider adding a optiions page to allow options such as adding underneath a OpenStreat map or terrain map or whatever
         // Initialise basemap
-        this.geojson = L.geoJSON(geojson_nation, {
+        let geojson = null;
+        if (geojsonKey == "custom") {
+            geojson = this.mapInterface.appInterface.dataStorage.customMapGeojson;
+        } else if (geojsonKey == "nation") {
+            geojson = geojson_nation;
+        } else if (geojsonKey == "admin") {
+            geojson = geojson_admin;
+        }
+        this.geojson = L.geoJSON(geojson, { // loads geojson argument if provided, else uses geojson_nation by default
             style: this.style,
         }).addTo(this.mapInterface.map); // Here added to map as it is the default base
 
         // Initialise overlays
-        this.initialiseGeoOverlay();
+        this.initialiseGeoOverlay(projectionKey);
         this.initialiseLakesOverlay();
         this.initialiseRiversOverlay();
 
@@ -23,7 +31,7 @@ export class MapLayersInterface {
             "Base Map": this.geojson,
         }
         this.overlayers = {
-            "Geographic": this.geoOverlay,
+            "Geographic-Mercator-Only": this.geoOverlay,
             "Lakes": this.lakesOverlay,
             "Rivers": this.riversOverlay,
         }
@@ -41,14 +49,17 @@ export class MapLayersInterface {
         this.lakesOverlay = L.geoJSON(geojson_lakes);
     }
 
-    initialiseGeoOverlay() { // adds geographic map underlay
+    initialiseGeoOverlay(projectionKey=null) { // adds geographic map underlay
         this.geoOverlay = L.imageOverlay(
             "./assets/layers/mercator-topographic.jpg",
             L.latLngBounds(
                 L.latLng(85.5,-180.2),
                 L.latLng(-85.5,180)
             ),
-        ).addTo(this.mapInterface.map); // As this is the default
+        )
+        if (projectionKey == "mercator") {
+            this.geoOverlay.addTo(this.mapInterface.map); // As this is the default
+        }
     }
 
     bringOverlayForward(overlayID) {
