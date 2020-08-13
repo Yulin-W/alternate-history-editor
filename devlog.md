@@ -9,11 +9,9 @@
 - [x] Save and load files
 
 ### Possible future additional changes (unlikely though in the near future)
-- Allow easier geojson base map addition and new save file format for customn geojsoning
 - wrap the timeline, timeline playback, colouring as a plugin, the colouring itself alongisde legend as a plugin and include as leaflet thing (ofc this really depends on time as it's a tangejnt task)
 - Split the functioning components of leaflet interatimng things into plugin like files (and perhaps share them indivdiually as plugins, e.g. the geojson colouring toolbar)
 - Timeline mode via leaflet-timeline (will need to add to geojson layers some kind of timetrack thing, but should be fine as doesn't affect background save fil;e format)
-- Projection changing dynamically? so save all settings as a temporary variable, and reset entire map; I'd say use proj4leaflet
 - Improve speed and responsiveness of leaflet rendering and underluying algorithm
 - Refactor menu bar
 - Generate colouring based on uploaded images
@@ -29,11 +27,12 @@
 - GIF generation of timeline (so like those border youtube videos)
 - Onmap label functionality
 - Loading previously made timelines
-- Show large regional labels on map
 - Styling polygons with images and patterns other than pure colours (should be a pluging somewhere)
 - Statistics page for evaluations of say number of regions uncder a colour, etc.
 - Leaflet measure for area measuring and length measurememnt and coordinate finding
+- Don't render borders when zoomed far out for ease of view
+- Highlight all regions belonging to the legend entry when hovering over legend
+- Allow arrow key switching between timeline entries
 - Get a better interface theme
 - Refactor code to reduce coupling, and finish up those optional todos
   - Ideally focus more on functional programming ideas and focus on pure functions and separate data and gui to avoid coupling
-- More map options as opposed to just the world map (for faster speeds and also finer regional distinctions, and also to allow use for say different maps in general)
