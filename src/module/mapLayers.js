@@ -108,9 +108,7 @@ export class MapLayersInterface {
         let currentID = this.mapInterface.appInterface.timelineInterface.currentID;
 
         layer.setStyle({
-            weight: 2,
-            color: 'black',
-            dashArray: '',
+            fillOpacity: 1
         });
 
         if ("colour_on_map" in layer.feature.properties) {
@@ -126,6 +124,7 @@ export class MapLayersInterface {
         layer.setStyle({
             weight: 1,
             color: 'gray',
+            fillOpacity: 0.6
         });
         if (this.hadPrevHovered) {
             this.prevHovered.classList.remove("hovered-on");
