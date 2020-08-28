@@ -19,15 +19,16 @@ Disclaimer: This is a work of fiction. Names, characters, businesses, places, ev
 ![](https://raw.githubusercontent.com/Yulin-W/alternate-history-editor/master/Sample-gifs/alternate_hist_sample.gif)
 
 ## Features
+- Fast, simple, responsive
+- Timeline autoplay/pause button (can be speeded up and down)
 - Easy map timeline editing: added new dates come with its independent map inherited from previous time point
 - Simple colouring in of map regions: 
   - Single region colouring
   - Lasso selection colouring of multiple regions
-- Choice of 2 base world maps:
+- Choice of 2 base world maps: (custom base map upload in geojson format also supported)
   - Countries
   - First level administrative divisions of countries
 - Automatically generated legend with editable labels
-- Upload any geojson map of your choice to serve as the basemap for editing
 - Region info including country/provincial name (depending on base map) displayed upon mouse hover
 - Range of map overlays
   - Geographic
