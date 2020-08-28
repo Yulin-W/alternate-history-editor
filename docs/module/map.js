@@ -30,7 +30,16 @@ export class MapInterface {
         // Takes in optional argumetn indicating the new projection to be used, if none defaults to EPSG3857
         this.currentProjection = newProjection ? newProjection : L.CRS.EPSG3857; // Mercator, default
         this.currentProjectionKey = projectionKey ? projectionKey : "mercator"; // Mercator, default
-        this.map = L.map('map', {crs : this.currentProjection});
+        this.map = L.map('map', {
+            crs : this.currentProjection,
+            // Make map scrolling smooth
+            scrollWheelZoom: false,
+            smoothWheelZoom: true,
+            smoothSensitivity: 1,
+            maxZoom: 10,
+            // Set canvas as default, improves speed considerably
+            renderer: L.canvas()
+        });
         this.map.setView([25, 10], 2);
         this.map.doubleClickZoom.disable(); // Disable double click zoom as it is used for legend editing
         let currentGeojsonKey = "nation"; // default
