@@ -1,17 +1,22 @@
-export class TimelineInterface {
+import { TimelineToolbarInterface } from "./timeline_toolbar.js";
 
+export class TimelineInterface {
     constructor(appInterface) {
         this.appInterface = appInterface; // TODO: I feel that doing this is not a good idea, but can't think of easier way for classes in composition to communciate witht he main class
         this.timelineTable = document.querySelector("table");
         this.tbody = this.timelineTable.querySelector("tbody");
         this.addCellAddSubtractListener();
         this.resetTimeline();
+        
+        // Things related to timelinetoolbar
+        this.timelineToolbarInterface = new TimelineToolbarInterface(this);
+        this.playing = false;
     }
 
     loadTimeline() { // For loading from a json file; practically, it reads the currently loaded timeline records in the dataStorage.entryDict
         this.clearTimeLine();
         let entryDictArray = Object.entries(this.appInterface.dataStorage.entryDict);
-        entryDictArray.sort((a, b) => (a[1].order > b[1].order) ? 1 : -1);
+        entryDictArray.sort((a, b) => (a[1].order > b[1].order) ? 1 : -1); // sorts entry dict so in order
         entryDictArray.forEach(entry => {
             // TODO: here I copied part of addEntry in as the original add entry coupling with dataStorage meant duplicative entry adding in dataStorage, perhaps can reduce code use
             let entryID = entry[0];
@@ -146,7 +151,7 @@ export class TimelineInterface {
 
     deleteCurrentCell() {
         const currentEntry = this.tbody.querySelector("tr:focus-within");
-        if (currentEntry) {
+        if (currentEntry && this.tbody.childElementCount > 1) { // Ensures minimum number of entries is 1, this is because when it gets to 0 the leaflet map and map data containers in data storage start to have bugs
             this.currentCell = null;
             // Performs order shift down for all entries after the deleted entry
             let order = this.appInterface.dataStorage.entryDict[this.currentID]["order"];
@@ -154,6 +159,7 @@ export class TimelineInterface {
             // Deletes entry data for the entry in dataStorage
             delete this.appInterface.dataStorage.entryDict[this.currentID];
             // Clicks to previous sibling if exists or goes to next sibling if doesn't exist
+
             if (currentEntry.previousSibling) {
                 currentEntry.previousSibling.childNodes[0].click();
             } else if (currentEntry.nextSibling) {
@@ -181,5 +187,23 @@ export class TimelineInterface {
     updateCorrespondingStorage(entryID) { // Updates corresponding Data Storage entry info for date and event for the entryID specified
         this.appInterface.dataStorage.entryDict[entryID]["date"] = this.currentDate.innerText;
         this.appInterface.dataStorage.entryDict[entryID]["event"] = this.currentEvent.innerText;
+    }
+
+    goToStart() {
+        this.tbody.firstChild.firstChild.click();
+    }
+
+    async playTimeline() { // default is 100ms between each timeline date
+        this.playing = true;
+        while (this.currentCell.parentNode.nextSibling) {
+            await new Promise(r => setTimeout(r, 400 / this.timelineToolbarInterface.playSpeed)); // base speed is 400ms
+            if (!this.playing) {
+                break;
+            }
+            this.currentCell.parentNode.nextSibling.firstChild.click();
+        }
+        if (!this.currentCell.parentNode.nextSibling) {
+            this.timelineToolbarInterface.playButton.click();
+        }
     }
 }

@@ -31,6 +31,7 @@
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <h1>General</h1>
+                    <p>To play the timeline, use the play buttons above it</p>
                     <p>Use top left layer button to change between map layer options</p>
                     <p>Edit legend labels: double click label text</p>
                     <h1>Save and Load</h1>
@@ -62,16 +63,19 @@
         </ul>
     </nav>
     <main>
-        <div id="timeline-editor">
-            <table>
-                <thead>
-                    <tr>
-                        <td>Date</td>
-                        <td>Event</td>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+        <div id="timeline-container">
+            <div id="timeline-toolbar"></div>
+            <div id="timeline-editor">
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Date</td>
+                            <td>Event</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
         <div id="map-editor">
             <nav id="toolbar">
