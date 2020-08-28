@@ -143,6 +143,18 @@ td {
     width: 30%;
 }
 
+#timeline-editor #timeline-help ul {
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    justify-items: center;
+}
+
+#timeline-editor #timeline-help li {
+    background-color: white;
+    padding: 5px;
+}
+
 
 /*Map editor*/
 

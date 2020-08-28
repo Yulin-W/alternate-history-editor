@@ -30,14 +30,15 @@
             <div id="help-modal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
-                    <h1>General</h1>
-                    <p>To play the timeline, use the play buttons above it</p>
-                    <p>Use top left layer button to change between map layer options</p>
+                    <h1>Timeline</h1>
+                    <p>Play the timeline: menubar above timeline list</p>
+                    <h1>Map</h1>
+                    <p>Change map layers: top left layers button on map</p>
                     <p>Edit legend labels: double click label text</p>
                     <h1>Save and Load</h1>
-                    <p>New admin map timeline wipes clean current map and replace basemap with admin-1 level world map</p>
-                    <p>New nation map timeline wipes clean current map and replace basemap with nation level world map</p>
-                    <p>New map from file wipes clean current map and prompts user to upload a custom geojson basemap; the save of such map will include the custom geojson as well, hence the save will be much larger than the admin/nation map</p>
+                    <p>Warning: opening a save, loading new basemap wipes clean current map</p>
+                    <p>The left most three new map options load in a new base map and wipes the current one clean</p>
+                    <p>New Map from Files require user to upload their own geojson basemaptom geojson basemap</p>
                     <h1>Colouring</h1>
                     <p>Use single fill for filling single province, use lasso fill to fill or delete multiple provinces</p>
                     <p>Currently chosen colour will have a solid black border and be protruding</p>
@@ -45,9 +46,6 @@
                     <p>Colours in the toolbar will have a double border if they are on the map already</p>
                     <p>Choose a colour: either from colour bar above map or from legend</p>
                     <p>Colour region: choose a colour and a date, then simply click the region</p>
-                    <h1>Timeline</h1>
-                    <p>Add date/event entry: Shift + Enter</p>
-                    <p>Delete date/event entry: Shift + Backspace</p>
                 </div>
             </div>
             <li class="button" id="options">Options</li>
@@ -75,6 +73,12 @@
                     </thead>
                     <tbody></tbody>
                 </table>
+                <div id="timeline-help">
+                    <ul>
+                        <li>Add entry   : Shift+Enter</li>
+                        <li>Delete entry: Shift+Backspace</li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div id="map-editor">
