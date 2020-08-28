@@ -35,7 +35,10 @@ export class MapInterface {
             // Make map scrolling smooth
             scrollWheelZoom: false,
             smoothWheelZoom: true,
-            smoothSensitivity: 2,
+            smoothSensitivity: 1,
+            maxZoom: 10,
+            // Set canvas as default, improves speed considerably
+            renderer: L.canvas()
         });
         this.map.setView([25, 10], 2);
         this.map.doubleClickZoom.disable(); // Disable double click zoom as it is used for legend editing
