@@ -140,7 +140,7 @@ export class TimelineInterface {
     }
 
     appendCellAfter() {
-        const currentEntry = this.tbody.querySelector("tr:focus-within");
+        const currentEntry = this.currentCell.parentNode;
         if (currentEntry) {
             const newDateCell = this.addEntry("", "", currentEntry);
             newDateCell.click();
@@ -150,7 +150,7 @@ export class TimelineInterface {
     }
 
     deleteCurrentCell() {
-        const currentEntry = this.tbody.querySelector("tr:focus-within");
+        const currentEntry = this.currentCell.parentNode;
         if (currentEntry && this.tbody.childElementCount > 1) { // Ensures minimum number of entries is 1, this is because when it gets to 0 the leaflet map and map data containers in data storage start to have bugs
             this.currentCell = null;
             // Performs order shift down for all entries after the deleted entry
