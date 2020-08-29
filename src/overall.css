@@ -1,0 +1,154 @@
+html, body {
+    font-size: small;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: row;
+}
+
+nav ul {
+    background-color: whitesmoke;
+    flex-shrink: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+li {
+    background: whitesmoke;
+    list-style: none;
+}
+
+footer {
+    background-color: gray;
+    flex-shrink: 0;
+}
+
+/*Functionality*/
+
+.button {
+    transition: all 0.2s ease-out;
+}
+
+.button:hover {
+    filter: brightness(90%);
+}
+
+.button.active {
+    filter: brightness(80%);
+}
+
+.modal {
+    display: block;
+    transition: opacity 0.5s linear;
+    visibility: hidden;
+    opacity: 0;
+    /* Hidden by default; the opacity is to allow for transtitions as display from none to block alone doesn't transit*/
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 30% auto;
+    /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    /* Could be more or less, depending on screen size */
+    border-radius: 20px;
+}
+
+/* The Close Button for modals*/
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*Tooltips*/
+
+/* setup tooltips */
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip:before, .tooltip:after {
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
+.tooltip:after {
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid rgba(0, 0, 0, .75);
+    border-left: 6px solid transparent;
+    content: '';
+    height: 0;
+    top: 20px;
+    left: 20px;
+    width: 0;
+}
+
+.tooltip:before {
+    background: rgba(0, 0, 0, .75);
+    border-radius: 2px;
+    color: #fff;
+    content: attr(data-title);
+    font-size: 14px;
+    padding: 6px 10px;
+    top: 26px;
+    white-space: nowrap;
+}
+
+/* the animations */
+
+/* fade */
+
+.tooltip.fade:after, .tooltip.fade:before {
+    transform: translate3d(0, -10px, 0);
+    transition: all .15s ease-in-out;
+}
+
+.tooltip.fade:hover:after, .tooltip.fade:hover:before {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}

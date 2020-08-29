@@ -1,0 +1,138 @@
+/*Map editor*/
+
+.leaflet-container {
+    background: #AADAFF;
+}
+
+#map-editor {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+#map {
+    height: 82%;
+    z-index: 0;
+    /* z-index set So that it doesn't compete over the help popup*/
+}
+
+/* Legend */
+
+.legend {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    line-height: 18px;
+    color: #555;
+    overflow-x: scroll;
+    height: 30vh;
+    width: 30vh;
+}
+
+.legend-entry {
+    display: flex;
+    flex-direction: row;
+    margin: 2px 5px;
+}
+
+.legend i {
+    border: 1px black solid;
+    border-radius: 3px;
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.info {
+    padding: 6px 8px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/*Toolbar*/
+
+#toolbar {
+    width: 100%;
+    border-bottom: solid gray 2px;
+    height: 15vh;
+}
+
+#colour-mode, #projection-mode {
+    border-top: gray 1px solid;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: start;
+    height: 18%;
+    width: 100%;
+}
+
+.fill-mode, .projection-mode-button {
+    border: lightgray outset 3px;
+    border-radius: 10px;
+    text-align: center;
+    display: block;
+    padding: 0;
+    margin: 2px 1px;
+    min-height: 15px;
+    max-height: 15px;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.fill-mode.active, .projection-mode-button.active {
+    border: gray 3px inset;
+}
+
+#colour-choice {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: start;
+    height: 63%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.colour {
+    border: lightgray outset 3px;
+    border-radius: 10px;
+    text-align: center;
+    display: block;
+    padding: 0;
+    margin: 5px 1px 1px 1px;
+    min-height: 15px;
+    max-height: 15px;
+    min-width: 15px;
+    max-width: 15px;
+}
+
+.colour.on-map {
+    border: black 3px double;
+}
+
+.colour.hovered-on {
+    /*This defined after above as the class property hovered-on (as in corresponding colour region hovered on in map) should take priority over on-map for border*/
+    margin-top: 1px;
+    margin-bottom: 4px;
+    border: black 3px dashed;
+}
+
+.colour.active {
+    /*This defined after above as the class property active should take priority over above2*/
+    border: black 3px solid;
+    margin-top: 1px;
+    margin-bottom: 4px;
+}
+
+#no-colour:after {
+    display: inline-block;
+    content: "\00d7";
+    text-align: center;
+    font-weight: 700;
+    color: red;
+}

@@ -1,0 +1,101 @@
+/*Timeline editor*/
+
+table,
+th,
+td {
+    padding: 5px 5px;
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+
+#timeline-container {
+    border-right: black 2px solid;
+    width: 30%;
+    display: flex;
+    flex-flow: column;
+}
+
+#timeline-toolbar {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+}
+
+#timeline-toolbar div {
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    margin: 2px;
+    font-size: large;
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+#play-button.ready:after {
+    display: inline-block;
+    content: "►";
+}
+
+#play-button.playing:after {
+    display: inline-block;
+    content: "⏸";
+}
+
+#go-to-start-button:after {
+    display: inline-block;
+    content: "■";
+}
+
+#play-speed-button.one:after {
+    display: inline-block;
+    content: "1x";
+}
+
+#play-speed-button.two:after {
+    display: inline-block;
+    content: "2x";
+}
+
+#play-speed-button.four:after {
+    display: inline-block;
+    content: "4x";
+}
+
+#timeline-editor {
+    border-right: black 2px solid;
+    width: 100%;
+    overflow: scroll;
+    height: 92vh;
+}
+
+#timeline-editor table {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#timeline-editor tbody td {
+    background-color: whitesmoke;
+}
+
+.date-cell {
+    width: 30%;
+}
+
+#timeline-editor #timeline-help ul {
+    display: flex;
+    flex-flow: column;
+    align-content: center;
+    justify-items: center;
+}
+
+#timeline-editor #timeline-help li {
+    background-color: white;
+    padding: 5px;
+}

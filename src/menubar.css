@@ -1,0 +1,14 @@
+/*Menubar*/
+#menubar {
+    border-bottom: 2px black solid;
+}
+
+#menubar li {
+    padding: 3px 8px;
+}
+
+#options-modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}

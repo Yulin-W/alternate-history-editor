@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="./leaflet/leaflet.css" />
     <script src="./leaflet/leaflet.js"></script>
     <script src="./leaflet-plugins/SmoothWheelZoom.js"></script>
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="timeline.css">
+    <link rel="stylesheet" href="map.css">
+    <link rel="stylesheet" href="overall.css">
+    <link rel="stylesheet" href="menubar.css">
     <script type="module" src="main.js" defer></script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -27,18 +30,18 @@
 <body>
     <nav id="menubar">
         <ul>
-            <li class="button" id="new-admin">New Admin Map Timeline</li>
-            <li class="button" id="new-nation">New Nation Map Timeline</li>
-            <li class="button" id="custom-map">
+            <li class="button tooltip fade" data-title="Click for new admin-1 level base map, wipes current map clean" id="new-admin">New Admin Map Timeline</li>
+            <li class="button tooltip fade" data-title="Click for new nation level base map, wipes current map clean" id="new-nation">New Nation Map Timeline</li>
+            <li class="button tooltip fade" data-title="Upload own base map in geojson format, wipes current map clean" id="custom-map">
                 New Map From File
             </li>
             <input type="file" id="file-choice-map" style="display:none" accept=".json">
-            <li class="button" id="save">Save</li>
-            <li class="button" id="load">
+            <li class="button tooltip fade" data-title="Saves current timeline" id="save">Save</li>
+            <li class="button tooltip fade" data-title="Loads timeline save" id="load">
                 Load
             </li>
             <input type="file" id="file-choice" style="display:none" accept=".json">
-            <li class="button" id="help">Help</li>
+            <li class="button tooltip fade" data-title="Click for more information about how to use the app" id="help">Help</li>
             <div id="help-modal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
@@ -61,7 +64,7 @@
                     <p>Colour region: choose a colour and a date, then simply click the region</p>
                 </div>
             </div>
-            <li class="button" id="options">Options</li>
+            <li class="button tooltip fade" data-title="Click for more options: work in progress" id="options">Options</li>
             <div id="options-modal" class="modal">
                 <div class="modal-content">
                     <span class="close">&times;</span>
