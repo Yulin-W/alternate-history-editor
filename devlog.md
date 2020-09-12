@@ -3,6 +3,9 @@
 ### General
 - Leaflet 1.6.0 was used
 
+### Bugs
+- Lasso tool doesn't wor under equirectangular projection
+
 ### Possible future additional changes (unlikely though in the near future)
 - Timeline features
 	- Allow shuffling timeline entry order around
