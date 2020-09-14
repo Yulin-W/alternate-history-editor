@@ -12,7 +12,7 @@ export class MapInterface {
     constructor(appInterface) {
         this.appInterface = appInterface; // TODO: I feel that doing this is not a good idea, but can't think of easier way for classes in composition to communciate witht he main class
         this.mapEditor = document.querySelector("#map-editor");
-        this.setupMap();
+        this.setupMap(); // Must be before map toolbar initialisation as latter relies on this.map being defined
         this.mapToolbar = new MapToolbar(this);
     }
 
@@ -23,7 +23,7 @@ export class MapInterface {
         this.map = null;
         this.setupMap(newProjection, projectionKey);
         this.appInterface.timelineInterface.currentCell.click()// Cell click refreshes map
-        this.mapToolbar.initialiseLassoSelect(); // needs to be reinitialised as lasso select requires a event listener on the map
+        this.mapToolbar.initialiseLassoObjectAndColouring(); // needs to be reinitialised as lasso select requires a event listener on the map
     }
 
     setupMap(newProjection=null, projectionKey=null) { // For initial starup map setup

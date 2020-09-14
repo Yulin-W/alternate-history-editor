@@ -56,21 +56,27 @@ export class MapToolbar {
         this.fillModeDict["fill-single"].click(); // set to the default single fill option
     }
 
-    initialiseLassoSelect() {
+    initialiseLassoObjectAndColouring() { // changes lasso object and adds its colouring functionality (separated here as during projection change, only this needs to be reinitialised, not the button linking part)
         this.lasso = L.lasso(this.mapInterface.map);
         this.lasso.setOptions({intersect: true});
+        // Links lasso select to colour fill functionality
+        this.mapInterface.map.on('lasso.finished', event => {
+            event.layers.forEach(layer => {
+                this.mapInterface.mapLayersInterface.singleFill(layer);
+            });
+            this.fillModeDict["fill-single"].click(); // return to default single fill option TODO: perhaps set lasso fill as right click? so won't need this return to default issue?
+        });
+    }
+
+    initialiseLassoSelect() {
+        this.initialiseLassoObjectAndColouring();
+        // Links lasso functionality to fillModeDict button
         this.fillModeDict["fill-lasso"].addEventListener("click", () => {
             if (this.lasso.enabled()) {
                 this.lasso.disable();
             } else {
                 this.lasso.enable();
             }
-        });
-        this.mapInterface.map.on('lasso.finished', event => {
-            event.layers.forEach(layer => {
-                this.mapInterface.mapLayersInterface.singleFill(layer);
-            });
-            this.fillModeDict["fill-single"].click(); // return to default single fill option TODO: perhaps set lasso fill as right click? so won't need this return to default issue?
         });
     }
 
@@ -104,7 +110,11 @@ export class MapToolbar {
             modeElement.innerText = modeInfo.text;
             this.projectionModeToolbar.appendChild(modeElement);
             modeElement.addEventListener("click", () => {
-                if (this.currentProjectionMode) // If there is already a selected colour, remove its active status
+                // to avoid possible issues with lasso initialisation due to new projection as lasso depends on the map which projection changes, click on single fill before projection change
+                this.lasso.disable();
+                this.fillModeDict["fill-single"].click();
+                // Altering projection mode
+                if (this.currentProjectionMode) // If there is already a selected projection
                     this.currentProjectionMode.classList.remove("active");
                 modeElement.classList.add("active");
                 this.currentProjectionMode = modeElement;
