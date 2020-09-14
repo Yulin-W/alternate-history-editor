@@ -2,6 +2,7 @@
 
 ### General
 - Leaflet 1.6.0 was used
+- To add more premade scenarios to app, first create a save of the scenario using the app, then turn to js form (see existing ones for example; effectively you turn the json object into an exportable object in a js file, quite simple, just declare the object as a variable and add export in front), then go to scenario_loader.js to add in relevant initialisation code
 
 ### Possible future additional changes (unlikely though in the near future)
 - Timeline features
@@ -23,3 +24,5 @@
 	- Integrate historic scenario and additional basemaps
 	- Refactor code to reduce coupling, and finish up those optional todos
   		- Ideally focus more on functional programming ideas and focus on pure functions and separate data and gui to avoid coupling
+	- Try to move help content into on the page assistance as reading help is really cumbersome
+	- Make scenario loading download from github not all initialised directly as that way, if too many sceanrios, will crunch up memory
