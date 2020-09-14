@@ -12,3 +12,13 @@
     flex-direction: column;
     width: 25%;
 }
+
+#scenario-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.scenario-button {
+    margin: 2px 2px;
+}
