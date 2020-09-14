@@ -23,3 +23,5 @@
 	- Integrate historic scenario and additional basemaps
 	- Refactor code to reduce coupling, and finish up those optional todos
   		- Ideally focus more on functional programming ideas and focus on pure functions and separate data and gui to avoid coupling
+	- Try to move help content into on the page assistance as reading help is really cumbersome
+	- Make scenario loading download from github not all initialised directly as that way, if too many sceanrios, will crunch up memory
