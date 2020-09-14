@@ -1,5 +1,5 @@
 import { Loader } from "./loader.js"; // save loader
-import { ScenarioLoader } from "./scenarioLoader.js";
+import { ScenarioLoader } from "./scenario_loader.js";
 
 //TODO: this should be refined much better and faster
 
