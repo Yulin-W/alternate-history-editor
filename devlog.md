@@ -20,6 +20,6 @@
 - General
 	- Allow arrow key switching between timeline entries
 	- Get a better interface theme
-	- Integrate historic scenario and additional basemaps
+	- Integrate common additional basemaps
 	- Refactor code to reduce coupling, and finish up those optional todos
   		- Ideally focus more on functional programming ideas and focus on pure functions and separate data and gui to avoid coupling
