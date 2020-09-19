@@ -19,6 +19,7 @@
 - Colouring
 	- Styling polygons with images and patterns other than pure colours (should be a plugin somewhere)
 - General
+	- Some older scenarios contain data bugs due to being made at older time, hence legend may keep displaying label despite no region having them; probably establish a save fixer algorithm in load that mends this issue by parsing through existing regions and changing region counts accordingly
 	- Allow arrow key switching between timeline entries
 	- Get a better interface theme
 	- Integrate common additional basemaps
