@@ -1,5 +1,9 @@
 ## Development
 
+### Bugs
+- Some scenarios have data corruptions which means counts of regions for labels are not necessarily correct
+- Loaded scenarios are not copied into map, instead modified directly, this means reloading the scenario will load the modified version of this, recode so this isn't the case, i.e. loading scenario is by copy not by calling upon the scenario data directly
+
 ### General
 - Leaflet 1.6.0 was used
 - To add more premade scenarios to app, first create a save of the scenario using the app, then turn to js form (see existing ones for example; effectively you turn the json object into an exportable object in a js file, quite simple, just declare the object as a variable and add export in front), then go to scenario_loader.js to add in relevant initialisation code
