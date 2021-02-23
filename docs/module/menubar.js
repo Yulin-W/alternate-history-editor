@@ -206,6 +206,8 @@ export class Menubar {
             this.helpModal.style.visibility = "hidden";
             this.helpModal.style.opacity = 0;
         });
+        // Click help once upon initialization
+        this.help.click();
     }
 
     initialiseOptions() { // Initialise options button
