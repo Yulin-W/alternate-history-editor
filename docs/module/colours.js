@@ -1,5 +1,6 @@
 export const colours = {};
 colours["no-colour"] = "silver";
+
 // White-grey
 colours["gainsboro"] = "gainsboro";
 colours["lightgray"] = "lightgray";
@@ -11,6 +12,17 @@ colours["lightslategray"] = "lightslategray";
 colours["slategray"] = "slategray";
 colours["darkslategray"] = "darkslategray";
 colours["black"] = "black";
+colours["steelgray"] = "#71797E";
+colours["gunmetalgray"] = "#818589";
+colours["pewter"] = "#899499";
+colours["platinum"] = "#E5E4E2";
+colours["smoke"] = "#848884";
+colours["charcoal"] = "	#36454F";
+colours["licorice"] = "#1B1212";
+colours["matteblack"] = "#28282B";
+colours["onyx"] = "#353935";
+colours["jetblack"] = "#343434";
+
 // Whitish colours
 colours["snow"] = "snow";
 colours["honeydew"] = "honeydew";
@@ -28,6 +40,7 @@ colours["antiquewhite"] = "antiquewhite";
 colours["linen"] = "linen";
 colours["lavenderblush"] = "lavenderblush";
 colours["mistyrose"] = "mistyrose";
+
 // Pink
 colours["pink"] = "pink";
 colours["lightpink"] = "lightpink";
@@ -35,6 +48,10 @@ colours["hotpink"] = "hotpink";
 colours["deeppink"] = "deeppink";
 colours["palevioletred"] = "palevioletred";
 colours["mediumvioletred"] = "mediumvioletred";
+colours["coralpink"] = "#EF88379"
+colours["pastelpink"] = "#F8C8DC"
+colours["pinkorange"] = "#F89880"
+
 // Red
 colours["red"] = "red";
 colours["salmon"] = "salmon";
@@ -45,12 +62,31 @@ colours["firebrick"] = "firebrick";
 colours["crimson"] = "crimson";
 colours["ruby"] = "#9B111E";
 colours["darkred"] = "darkred";
+colours["scarlet"] = "#FF2400";
+colours["rubyred"] = "#E0115F";
+colours["terracotta"] = "#E3735E";
+colours["vermillion"] = "#E34234";
+colours["cerise"] = "#DE3163";
+colours["oxblood"] = "#4A0404";
+colours["redbrown"] = "#A52A2A";
+colours["redochre"] = "#913831";
+colours["garnet"] = "#9A2A2A";
+colours["tuscanred"] = "#7C3030";
+colours["ajaxred"] = "#D2122E";
+colours["amaranth"] = "#E52B50";
+colours["carnelian"] = "#B31B1B";
+colours["cinnabar"] = "#E44D2E";
+
 // Orange
 colours["coral"] = "coral";
 colours["tomato"] = "tomato";
 colours["orangered"] = "orangered";
 colours["orange"] = "orange";
 colours["darkorange"] = "darkorange";
+colours["burntorange"] = "#CC5500";
+colours["cadmiumorange"] = "#F28C28";
+colours["mango"] = "#F4BB44";
+
 // Yellow
 colours["khaki"] = "khaki";
 colours["darkkhaki"] = "darkkhaki";
@@ -64,6 +100,13 @@ colours["peachpuff"] = "peachpuff";
 colours["yellow"] = "yellow";
 colours["fire"] = "#e25822";
 colours["gold"] = "gold";
+colours["amber"] = "#FFBF00";
+colours["brightyellow"] = "#FFEA00";
+colours["cadmiumyellow"] = "#FDDA0D";
+colours["canaryyellow"] = "#FFFF8F";
+colours["citrine"] = "#E4D00A";
+colours["flax"] = "#EEDC82";
+
 // Green
 colours["lime"] = "lime";
 colours["lawngreen"] = "lawngreen";
@@ -86,6 +129,40 @@ colours["olivedrab"] = "olivedrab";
 colours["persian-green"] = "#00A693";
 colours["basil"] = "#579229";
 colours["olive"] = "olive";
+colours["bluegreen"] = "#088F8F";
+colours["celadon"] = "#AFE1AF";
+colours["chartreuse"] = "#DFFF00";
+colours["emeraldgreen"] = "#50C878";
+colours["ferngreen"] = "#4F7942";
+colours["grassgreen"] = "#7CFC00";
+colours["forestgreen"] = "#228B22";
+colours["huntergreen"] = "#355E3B";
+colours["jade"] = "#00A36C";
+colours["junglegreen"] = "#2AAA8A";
+colours["kellygreen"] = "#4CBB17";
+colours["lincolngreen"] = "#478778";
+colours["neongreen"] = "#0FFF50";
+colours["pistachio"] = "#93C572";
+colours["sagegreen"] = "#8A9A5B";
+colours["pastelgreen"] = "#C1E1C1";
+colours["nyanza"] = "#ECFFDC";
+colours["armygreen"] = "#454B1B";
+colours["eucalyptus"] = "#5F8575";
+colours["malachite"] = "#0BDA51";
+colours["peridot"] = "#B4C424";
+colours["shamrockgreen"] = "#009E60";
+colours["seafoamgreen"] = "#9FE2BF";
+colours["artichoke"] = "#8F9779";
+colours["avocado"] = "#568203";
+colours["bottlegreen"] = "#006A4E";
+colours["artichokegreen"] = "#4B6F44";
+colours["brunswickgreen"] = "#1B4D3E";
+colours["carlsberggreen"] = "#17B169";
+colours["castletongreen"] = "#00563B";
+colours["darkpastelgreen"] = "#03C03C";
+colours["erin"] = "#00FF40";
+colours["harlequin"] = "#3FFF00";
+
 // Cyan
 colours["lightcyan"] = "lightcyan";
 colours["cyan"] = "cyan";
@@ -93,13 +170,19 @@ colours["aqua"] = "aqua";
 colours["aquamarine"] = "aquamarine";
 colours["mediumaquamarine"] = "mediumaquamarine";
 colours["paleturquoise"] = "paleturquoise";
-colours["medium"] = "medium";
 colours["turquoise"] = "turquoise";
 colours["darkturquoise"] = "darkturquoise";
 colours["lightseagreen"] = "lightseagreen";
 colours["cadetblue"] = "cadetblue";
 colours["darkcyan"] = "darkcyan";
 colours["teal"] = "teal";
+colours["aero"] = "#7CB9E8";
+colours["celeste"] = "#B2FFFF";
+colours["bayernblue"] = "#0066B2";
+colours["capri"] = "#00BFFF";
+colours["fluorescentblue"] = "#15F4EE";
+colours["mediumturquoise"] = "#48D1CC";
+
 // Blue
 colours["sky-blue"] = "skyblue";
 colours["powderblue"] = "powderblue";
@@ -120,6 +203,30 @@ colours["darkslateblue"] = "darkslateblue";
 colours["persian-blue"] = "#1C39BB";
 colours["navy"] = "navy";
 colours["midnight-blue"] = "midnightblue";
+colours["babyblue"] = "#89CFF0";
+colours["brightblue"] = "#0096FF";
+colours["cobaltblue"] = "#0047AB";
+colours["denim"] = "#6F8FAF";
+colours["egyptianblue"] = "#1434A4";
+colours["electricblue"] = "#7DF9FF";
+colours["glaucous"] = "#6082B6";
+colours["periwinkle"] = "#CCCCFF";
+colours["robineggblue"] = "#96DED1";
+colours["sapphireblue"] = "#0F52BA";
+colours["zaffre"] = "#0818A8";
+colours["verdigris"] = "#40B5AD";
+colours["phthalo"] = "#000F89";
+
+colours["tottenhamnavy"] = "#132257";
+colours["trueblue"] = "#2D68C4";
+colours["uranianblue"] = "#AFDBF5";
+colours["warriorsblue"] = "#1D428A";
+colours["yankeesblue"] = "#0C2340";
+colours["tealblue"] = "#367588";
+colours["savoyblue"] = "#4B61D1";
+colours["prussianblue"] = "#003153";
+colours["polynesianblue"] = "#224C98";
+
 // Purple
 colours["lavender"] = "lavender";
 colours["thistle"] = "thistle";
@@ -138,6 +245,12 @@ colours["purple"] = "purple";
 colours["indigo"] = "indigo";
 colours["tyrian-purple"] = "#66023C";
 colours["wine"] = "#722f37";
+colours["byzantium"] = "#702963";
+colours["lilac"] = "#AA98A9";
+colours["mauve"] = "#E0B0FF";
+colours["mulberry"] = "#770737";
+colours["puce"] = "#A95C68";
+colours["wisteria"] = "#BDB5D5";
 
 // Brown
 colours["brown"] = "brown";
@@ -156,3 +269,13 @@ colours["peru"] = "peru";
 colours["saddlebrown"] = "saddlebrown";
 colours["sienna"] = "sienna";
 colours["maroon"] = "maroon";
+colours["bronze"] = "#CD7F32";
+colours["buff"] = "#DAA06D";
+colours["camel"] = "#C19A6B";
+colours["chestnut"] = "#954535";
+colours["cinnamon"] = "#D27D2D";
+colours["coffee"] = "#6F4E37";
+colours["copper"] = "#B87333";
+colours["ecru"] = "#C2B280";
+colours["cordovan"] = "#814141";
+colours["ochre"] = "#CC7722";
